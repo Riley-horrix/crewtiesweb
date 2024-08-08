@@ -12,6 +12,8 @@
 import WebbingState from "@/lib/WebbingState"
 import { StateFuncs } from "@/app/design/page"
 
+import styles from "./WebbingDesign.module.css";
+
 interface Props {
   state: WebbingState,
   stateFuncs: StateFuncs
@@ -24,5 +26,9 @@ interface Props {
  * @returns 
  */
 export default function WebbingDesigner({ state, stateFuncs }: Props) {
-  return <h1>Designer</h1>
+  return (
+    <div className={styles.container}>
+      The Designer
+    </div>
+  );
 }

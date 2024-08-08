@@ -20,6 +20,9 @@ body {
   padding: 0;
   color: var(--fontcol);
   background: var(--bgpri);
+}
+
+body {
   height: 100vh;
 }
 

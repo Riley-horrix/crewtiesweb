@@ -24,8 +24,18 @@ export enum LayerState {
  * @member timesNewRoman
  */
 export enum WebbingFonts {
-  sansSerif = 1,
-  timesNewRoman = 2
+  arial = 0,
+  timesNewRoman = 1
+}
+
+export function fontEnumToString(e: WebbingFonts) {
+  switch (e) {
+    case WebbingFonts.arial:
+      return "Arial";
+
+    case WebbingFonts.timesNewRoman:
+      return "Times New Roman"
+  }
 }
 
 /**
