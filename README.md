@@ -4,35 +4,33 @@ This repository is for the CrewTies webpage, designed to advertise the company, 
 
 ## Testing
 
-## Building
-To build from scratch, first install dependencies,
-```bash
-npm install
-# or
-yarn install
-# or 
-pnpm install
+To run the entire test suite, use,
+```make
+make test 
 ```
 
-Then to create a build of the website,
-```bash
-npm build
-# or
-yarn build
-# or 
-pnpm build
+## Building
+To create a production build,
+
+```make
+make build
 ```
 
 ## Developing
-This stage assumes you have installed all the necessary dependencies in build stage.
 
 To run the developmenet server, 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+```make
+make server
 ```
 
 This creates a server on [http://localhost:3000](http://localhost:3000), browse there to see the page.
+
+## Commiting 
+
+The project uses the [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/#specification) framework for commit messages. This is to ensure consistency and strive for more organized commits. For example :
+```
+feat(homepage): Started css styling process on homepage.
+
+fix(design): Fixed issue of being unable to save artwork in design tool.
+```

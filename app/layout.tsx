@@ -1,3 +1,14 @@
+/**
+ * @file layout.tsx
+ * @author Riley Horrix (riley@horrix.com)
+ * @brief The global layout file
+ * @version 0.1
+ * @date 2024-08-08
+ * 
+ * Copyright (c) Riley Horrix 2024
+ * 
+ */
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -13,6 +24,10 @@ export const metadata: Metadata = {
   description: "The official webpage of CrewTies, high quality rowing boat straps.",
 };
 
+/**
+ * Generates the root layout for the website, the header nav bar and footer. Content is placed inside of it.
+ * @returns 
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -1,16 +1,16 @@
 :root {
   --fontcol: #202020;
-  --bgpri: #f6f6f6;
-  --bgsec: #f3f0e4;
+  --bgpri: #f0e3d7;
+  --bgsec: #e8e4d5;
   --bgter: rgb(141, 141, 141);
   --accent: #ffc700;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fontcol: #e2e2e2;
+    /* --fontcol: #e2e2e2;
     --bgpri: #4a4a4a;
-    --bgsec: #6e6e6e;
+    --bgsec: #6e6e6e; */
   }
 }
 
