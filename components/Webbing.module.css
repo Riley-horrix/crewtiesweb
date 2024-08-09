@@ -8,5 +8,6 @@
 .webbing {
   width: 8rem;
   height: 35rem;
-  background-color: black;
+  border: 1px solid var(--accent);
+  /* background-color: black; */
 }

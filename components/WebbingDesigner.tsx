@@ -9,7 +9,7 @@
  * 
  */
 
-import WebbingState from "@/lib/WebbingState"
+import WebbingState from "@/lib/webbingState"
 import { StateFuncs } from "@/app/design/page"
 
 import styles from "./WebbingDesign.module.css";
