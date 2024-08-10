@@ -34,7 +34,7 @@ export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
 
     initP5();
     if (p5instance !== undefined) {
-      return p5instance.remove();
+      p5instance.remove();
     }
   }, [isMounted, sketch]);
 

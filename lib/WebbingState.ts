@@ -55,23 +55,23 @@ export function fontEnumToString(e: WebbingFonts) {
  */
 export interface WebbingLayer {
   // General
-  id: string,
-  hspace: number,
-  vspace: number,
-  size: number,
-  rowoff: number,
-  bgColor: string,
+  id: string,         //
+  hspace: number,     //
+  vspace: number,     //  
+  size: number,       //
+  rowoff: number,     //  
+  bgColor: string,    //
 
-  state: LayerState,
+  state: LayerState,  //
 
   // For logo
-  img: string,
+  img: string,        //
 
   // For text
-  text: string,
-  font: WebbingFonts,
-  fontColor: string,
-  bold: boolean
+  text: string,       //
+  font: WebbingFonts, //
+  fontColor: string,  //
+  bold: boolean       //
 }
 
 // An empty WebbingState object

@@ -10,14 +10,17 @@
  */
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Slab } from "next/font/google";
+
+import { NextUIProvider } from "@nextui-org/react";
+
 import "./globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import styles from "./layout.module.css";
 import Logo from "@/components/Logo";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Roboto_Slab({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CrewTies",
@@ -35,13 +38,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <nav className={styles.navbar}>
-          <div className={styles.navitem}></div>
-          <Logo size={150} className={styles.navitem} />
-          <i className={`${styles.navitem} ${styles.burger} bi bi-list`}></i>
-        </nav>
-        {children}
+      <body className={font.className}>
+        <NextUIProvider>
+          <nav className={styles.navbar}>
+            <div className={styles.navitem}></div>
+            <Logo size={150} className={styles.navitem} />
+            <i className={`${styles.navitem} ${styles.burger} bi bi-list`}></i>
+          </nav>
+          {children}
+        </NextUIProvider>
       </body>
     </html>
   );

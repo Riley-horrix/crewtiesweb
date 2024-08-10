@@ -14,6 +14,9 @@ import { StateFuncs } from "@/app/design/page"
 
 import styles from "./WebbingDesign.module.css";
 
+import React from "react";
+import WebbingSlider from "./WebbingSlider";
+
 interface Props {
   state: WebbingState,
   stateFuncs: StateFuncs
@@ -28,7 +31,11 @@ interface Props {
 export default function WebbingDesigner({ state, stateFuncs }: Props) {
   return (
     <div className={styles.container}>
-      The Designer
+      {/* TODO - maybe change to a custom input field. */}
+      <h1><i>{state.name}</i>{' '}<i className="bi bi-pencil-square"></i></h1>
+      <hr className={styles.hdivider}></hr>
+      <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} />
+      <hr className={styles.hdivider}></hr>
     </div>
   );
 }

@@ -16,6 +16,8 @@ import WebbingDesigner from "@/components/WebbingDesigner";
 
 import WebbingState, { WebbingLayer, emptyWebbingState } from "@/lib/webbingState";
 
+import styles from "./design.module.css";
+
 import { useState } from "react";
 
 /**
@@ -63,11 +65,57 @@ export interface StateFuncs {
 export default function Design() {
   const [webbingState, setWebbingState] = useState<WebbingState>(emptyWebbingState);
 
-  const appendLayer: (arg0: WebbingLayer) => void = (layer) => { }
-  const editLayer: (arg0: string, arg1: string, arg2: any) => void = (layer, field, value) => { }
-  const removeLayer: (arg0: string) => void = (layer) => { }
-  const setWebbingName: (arg0: string) => void = (name) => { }
-  const setWebbingAnlge: (arg0: number) => void = (angle) => { }
+  const appendLayer: (arg0: WebbingLayer) => void = (layer) => {
+    setWebbingState((prev) => {
+      return ({
+        ...prev,
+        layers: [...prev.layers, layer]
+      })
+    });
+  }
+  const editLayer: (arg0: string, arg1: string, arg2: any) => void = (layerId, field, value) => {
+    setWebbingState((prev) => {
+      const thisLayers = prev.layers;
+      thisLayers.map((layer) => {
+        if (layer.id === layerId) {
+          return ({
+            ...layer,
+            [field]: value
+          })
+        } else {
+          return layer;
+        }
+      });
+
+      return ({
+        ...prev,
+        layers: thisLayers
+      });
+    })
+  }
+  const removeLayer: (arg0: string) => void = (layerId) => {
+    setWebbingState((prev) => {
+      const newLayers = prev.layers.filter((layer) => {
+        return layer.id == layerId
+      });
+      return ({
+        ...prev,
+        layers: newLayers
+      })
+    })
+  }
+  const setWebbingName: (arg0: string) => void = (newName) => {
+    setWebbingState((prev) => ({
+      ...prev,
+      name: newName
+    }))
+  }
+  const setWebbingAnlge: (arg0: number) => void = (newAngle) => {
+    setWebbingState((prev) => ({
+      ...prev,
+      angle: newAngle
+    }))
+  }
 
   const stateFuncs: StateFuncs = {
     appendLayer,
@@ -78,7 +126,7 @@ export default function Design() {
   }
 
   return (
-    <main className="containerRow">
+    <main className={styles.container}>
       <Webbing state={webbingState} />
       <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
     </main>
