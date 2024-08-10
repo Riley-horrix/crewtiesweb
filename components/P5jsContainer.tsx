@@ -3,15 +3,13 @@ import { RefObject, useEffect, useRef, useState } from "react";
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
-type P5jsContainer = ({ sketch }: { sketch: P5jsSketch }) => React.JSX.Element;
+type P5jsContainer = ({ sketch, className }: { sketch: P5jsSketch, className: string }) => React.JSX.Element;
 
 // From https://aleksati.net/posts/how-to-use-p5js-with-nextjs-in-2024#building-a-p5-container-component
 
-export const P5jsContainer: P5jsContainer = ({ sketch }) => {
+export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
   const parentRef = useRef<P5jsContainerRef>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false)
-
-  console.log(parentRef)
 
   // on mount
   useEffect(() => {
@@ -19,7 +17,7 @@ export const P5jsContainer: P5jsContainer = ({ sketch }) => {
   }, [])
 
   useEffect(() => {
-    if (!isMounted || parentRef === null) return;
+    if (!isMounted) return;
     var p5instance: p5Types;
     const initP5 = async () => {
       try {
@@ -35,10 +33,10 @@ export const P5jsContainer: P5jsContainer = ({ sketch }) => {
     };
 
     initP5();
-    if (p5instance) {
+    if (p5instance !== undefined) {
       return p5instance.remove();
     }
   }, [isMounted, sketch]);
 
-  return <div ref={parentRef}></div>;
+  return <div ref={parentRef} className={className}></div>;
 };

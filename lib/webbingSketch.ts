@@ -101,7 +101,7 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
 
     sketch.draw = () => {
       console.log("Drawing Webbing")
-      sketch.background(255, 204, 0)
+      sketch.background(20, 100, 200)
       var totalHeight = 0;
 
       // Calculate total height of all layers and populate images.

@@ -35,9 +35,7 @@ import { webbingSketch } from "@/lib/webbingSketch"
 export default function Webbing({ state }: Props) {
   return (
     <div className={styles.container}>
-      <div className={styles.webbing}>
-        <P5jsContainer sketch={webbingSketch(state)} />
-      </div>
+      <P5jsContainer sketch={webbingSketch(state)} className={styles.webbing} />
     </div>
   );
 }
