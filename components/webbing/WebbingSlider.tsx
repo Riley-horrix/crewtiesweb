@@ -9,8 +9,6 @@
  * 
  */
 
-import styles from "./WebbingSlider.module.css";
-
 import React, { useState } from "react";
 import { Slider, SliderValue } from "@nextui-org/slider";
 import { Tooltip } from "@nextui-org/react";
@@ -28,12 +26,15 @@ interface Props {
   start?: number,
   init?: number,
   marks?: Mark[],
-  valueDisplay?: (arg0: SliderValue) => string
+  valueDisplay?: (arg0: SliderValue) => string,
+  onChangeFunc?: (arg0: SliderValue) => void,
+  tooltip: string
 }
 
-export default function DesignSlider({ label, min, max, step = 1, start = 0, init = 0, marks = undefined, valueDisplay = undefined }: Props) {
+export default function DesignSlider({ label, min, max, step = 1, start = 0, init = 0, marks = undefined, valueDisplay = undefined, onChangeFunc = undefined, tooltip = "" }: Props) {
 
   const [val, setVal] = useState(init);
+  const [ttOpen, setTTOpen] = useState<boolean>(false);
 
   return (
     <Slider
@@ -46,7 +47,9 @@ export default function DesignSlider({ label, min, max, step = 1, start = 0, ini
       fillOffset={start}
       defaultValue={init}
       getValue={valueDisplay}
+      // eslint-diable-next
       onChange={setVal}
+      onChangeEnd={onChangeFunc}
       classNames={{
         base: "max-w-md",
         thumb: "bg-accent",
@@ -58,11 +61,22 @@ export default function DesignSlider({ label, min, max, step = 1, start = 0, ini
           {children}
           <Tooltip
             className="w-[200px] px-1.5 text-tiny text-default-600 rounded-small"
-            content="The angle that the design is drawn onto the webbing at."
+            content={tooltip}
+            isOpen={ttOpen}
             placement="right"
           >
             <span className="transition-opacity opacity-80 hover:opacity-100">
-              <i className="bi bi-info-circle"></i>
+              <i className="bi bi-info-circle"
+                onMouseEnter={() => {
+                  setTTOpen(true);
+                }}
+                onMouseLeave={() => {
+                  setTTOpen(false);
+                }}
+                onClick={() => {
+                  setTTOpen(prev => !prev);
+                }}
+              ></i>
             </span>
           </Tooltip>
         </label>

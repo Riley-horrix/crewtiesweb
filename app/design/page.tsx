@@ -11,8 +11,8 @@
  * 
  */
 
-import Webbing from "@/components/Webbing";
-import WebbingDesigner from "@/components/WebbingDesigner";
+import Webbing from "@/app/design/Webbing";
+import WebbingDesigner from "@/app/design/WebbingDesigner";
 
 import WebbingState, { WebbingLayer, emptyWebbingState } from "@/lib/webbingState";
 

@@ -23,7 +23,7 @@ import { useEffect, useRef, useState } from "react";
 
 import p5Types from "p5";
 import React from "react";
-import { P5jsContainer } from "./P5jsContainer";
+import { P5jsContainer } from "@/components/P5jsContainer";
 
 import { webbingSketch } from "@/lib/webbingSketch"
 

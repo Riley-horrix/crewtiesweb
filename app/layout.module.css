@@ -1,5 +1,5 @@
 .navbar {
-  height: 4rem;
+  min-height: 4rem;
   width: 100%;
   background-color: var(--bgter);
   display: flex;
