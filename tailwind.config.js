@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ter: "rgb(141,141,141, 0.5)",
+        pri: "#foe3d7",
+        sec: "#e8e4d5",
+        ter: "#8d8d8d",
+        fcol: "#202020",
         accent: "#ffc700"
       }
     },
