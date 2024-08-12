@@ -66,6 +66,7 @@ export default function DesignSlider({ label, min, max, step = 1, start = 0, ini
             placement="right"
           >
             <span className="transition-opacity opacity-80 hover:opacity-100">
+              {/* TODO : This is hacky and doesn't really work on mobiles. */}
               <i className="bi bi-info-circle"
                 onMouseEnter={() => {
                   setTTOpen(true);

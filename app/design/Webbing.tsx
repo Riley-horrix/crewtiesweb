@@ -11,21 +11,19 @@
  * 
  */
 
+import styles from "./Webbing.module.css";
+
+import { webbingSketch } from "@/lib/webbingSketch"
 import WebbingState from "@/lib/webbingState";
 
-import styles from "./Webbing.module.css";
+import { P5jsContainer } from "@/components/P5jsContainer";
+
+import React from "react";
+
 
 interface Props {
   state: WebbingState
 }
-
-import { useEffect, useRef, useState } from "react";
-
-import p5Types from "p5";
-import React from "react";
-import { P5jsContainer } from "@/components/P5jsContainer";
-
-import { webbingSketch } from "@/lib/webbingSketch"
 
 /**
  * The webbing display component.

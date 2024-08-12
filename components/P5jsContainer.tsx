@@ -9,7 +9,8 @@ type P5jsContainer = ({ sketch, className }: { sketch: P5jsSketch, className: st
 
 export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
   const parentRef = useRef<P5jsContainerRef>(null);
-  const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [p5instance, setp5] = useState<p5Types | undefined>(undefined)
 
   // on mount
   useEffect(() => {
@@ -18,24 +19,23 @@ export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
 
   useEffect(() => {
     if (!isMounted) return;
-    var p5instance: p5Types;
+    if (p5instance !== undefined) {
+      console.log("Removing")
+      p5instance.remove();
+    }
     const initP5 = async () => {
       try {
         // import the p5 client-side
         const p5 = (await import("p5")).default;
         new p5((p) => {
           sketch(p, parentRef.current);
-          p5instance = p;
+          setp5(p);
         });
       } catch (error) {
         console.log(error);
       }
     };
-
     initP5();
-    if (p5instance !== undefined) {
-      p5instance.remove();
-    }
   }, [isMounted, sketch]);
 
   return <div ref={parentRef} className={className}></div>;
