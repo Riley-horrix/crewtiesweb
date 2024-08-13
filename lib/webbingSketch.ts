@@ -36,6 +36,9 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
           // TODO move to common function
           var img = imgMap.get(layer.id);
           if (img === undefined) {
+            if (!layer.img) {
+              return Infinity;
+            }
             img = sketch.loadImage(layer.img);
             imgMap.set(layer.id, img);
           }
@@ -58,6 +61,9 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         case LayerState.LOGO:
           var img = imgMap.get(layer.id);
           if (img === undefined) {
+            if (!layer.img) {
+              return layer.vspace * 2;
+            }
             img = sketch.loadImage(layer.img);
             imgMap.set(layer.id, img);
           }

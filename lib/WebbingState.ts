@@ -75,10 +75,30 @@ export interface WebbingLayer {
 }
 
 // An empty WebbingState object
-export const emptyWebbingState: WebbingState = {
-  name: "My Design",
-  angle: 0,
-  layers: []
+export const emptyWebbingState: () => WebbingState = () => {
+  return {
+    name: "My Design",
+    angle: 0,
+    layers: []
+  }
+}
+
+// An empty WebbingLayer object - Note that the id MUST be set
+export const emptyLayerState: () => WebbingLayer = () => {
+  return {
+    id: "",
+    hspace: 5,
+    vspace: 5,
+    size: 50,
+    rowoff: 0,
+    bgColor: "#FFFFFF",
+    state: LayerState.NONE,
+    img: "",
+    text: "",
+    font: WebbingFonts.timesNewRoman,
+    fontColor: "",
+    bold: false
+  }
 }
 
 /**

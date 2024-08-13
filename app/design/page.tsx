@@ -63,20 +63,16 @@ export interface StateFuncs {
  * and provides functions to manipulate the design to it's children.
  */
 export default function Design() {
-  const [webbingState, setWebbingState] = useState<WebbingState>(emptyWebbingState);
+  const [name, setName] = useState<string>(emptyWebbingState().name);
+  const [angle, setAngle] = useState<number>(emptyWebbingState().angle);
+  const [layers, setLayers] = useState<WebbingLayer[]>(emptyWebbingState().layers)
 
   const appendLayer: (arg0: WebbingLayer) => void = (layer) => {
-    setWebbingState((prev) => {
-      return ({
-        ...prev,
-        layers: [...prev.layers, layer]
-      })
-    });
+    setLayers(prev => [...prev, layer]);
   }
   const editLayer: (arg0: string, arg1: string, arg2: any) => void = (layerId, field, value) => {
-    setWebbingState((prev) => {
-      const thisLayers = prev.layers;
-      thisLayers.map((layer) => {
+    setLayers((prev) => {
+      return prev.map((layer) => {
         if (layer.id === layerId) {
           return ({
             ...layer,
@@ -86,35 +82,16 @@ export default function Design() {
           return layer;
         }
       });
-
-      return ({
-        ...prev,
-        layers: thisLayers
-      });
     })
   }
   const removeLayer: (arg0: string) => void = (layerId) => {
-    setWebbingState((prev) => {
-      const newLayers = prev.layers.filter((layer) => {
-        return layer.id == layerId
-      });
-      return ({
-        ...prev,
-        layers: newLayers
-      })
-    })
+    setLayers((prev) => prev.filter((item) => item.id !== layerId));
   }
   const setWebbingName: (arg0: string) => void = (newName) => {
-    setWebbingState((prev) => ({
-      ...prev,
-      name: newName
-    }))
+    setName(newName);
   }
   const setWebbingAnlge: (arg0: number) => void = (newAngle) => {
-    setWebbingState((prev) => ({
-      ...prev,
-      angle: newAngle
-    }))
+    setAngle(newAngle);
   }
 
   const stateFuncs: StateFuncs = {
@@ -123,6 +100,12 @@ export default function Design() {
     removeLayer,
     setWebbingName,
     setWebbingAnlge
+  }
+
+  const webbingState = {
+    name,
+    angle,
+    layers
   }
 
   return (
