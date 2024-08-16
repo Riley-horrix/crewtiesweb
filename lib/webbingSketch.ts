@@ -10,15 +10,29 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
     const imgMap: Map<string, p5Types.Image> = new Map();
     var maxWH = 0;
 
+    sketch.preload = () => {
+      // Populate images
+      state.layers.forEach((layer) => {
+        if (!layer.img) {
+          return;
+        }
+        sketch.loadImage(layer.img, (img) => { img.loadPixels(); imgMap.set(layer.id, img) }, () => console.log("failure to load image"));
+      })
+    }
+
     sketch.setup = () => {
       var parentStyle = window.getComputedStyle(parentRef);
       const pWidth = parseInt(parentStyle.width);
       const pHeight = parseInt(parentStyle.height);
+      maxWH = pWidth > pHeight ? pWidth : pHeight;
       const canvas = sketch.createCanvas(pWidth, pHeight).parent(parentRef);
 
       sketch.translate(pWidth / 2, pHeight / 2);
       sketch.angleMode(sketch.DEGREES);
       sketch.rectMode(sketch.CORNER);
+
+      sketch.textAlign(sketch.LEFT, sketch.TOP);
+
       sketch.noLoop();
     }
 
@@ -35,13 +49,7 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         case LayerState.LOGO:
           // TODO move to common function
           var img = imgMap.get(layer.id);
-          if (img === undefined) {
-            if (!layer.img) {
-              return Infinity;
-            }
-            img = sketch.loadImage(layer.img);
-            imgMap.set(layer.id, img);
-          }
+          if (!img) return layer.hspace * 2;
           return layer.size + layer.hspace * 2;
       }
     }
@@ -53,20 +61,15 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
 
         case LayerState.TEXT:
           // TODO : Make this dependent on text in future
-          const MAGIC = 0.8;
+          const MAGIC = 0.7;
           sketch.textFont(fontEnumToString(layer.font));
           sketch.textSize(layer.size);
           return (sketch.textAscent() + sketch.textDescent()) * MAGIC + layer.vspace * 2;
 
         case LayerState.LOGO:
           var img = imgMap.get(layer.id);
-          if (img === undefined) {
-            if (!layer.img) {
-              return layer.vspace * 2;
-            }
-            img = sketch.loadImage(layer.img);
-            imgMap.set(layer.id, img);
-          }
+          if (!img) return layer.vspace * 2;
+
           return getImgDimensions(img, layer.size)[1] + layer.vspace * 2;
       }
     }
@@ -98,16 +101,16 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
 
         case LayerState.LOGO:
           const img = imgMap.get(layer.id);
-          if (img) {
-            const [width, height] = getImgDimensions(img, layer.size);
-            sketch.image(img, x, y, width, height)
-          }
+          if (!img) return;
+
+          const [width, height] = getImgDimensions(img, layer.size);
+          sketch.image(img, x, y, width, height);
       }
     }
 
     sketch.draw = () => {
-      console.log("Drawing Webbing")
-      sketch.background(20, 100, 200)
+      console.log("Drawing Webbing", state)
+      sketch.background("#ffffff")
       var totalHeight = 0;
 
       // Calculate total height of all layers and populate images.
@@ -115,12 +118,12 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         totalHeight += calcHeight(layer);
       })
 
-      sketch.rotate(state.angle);
-
       // If no layers then don't draw
       if (totalHeight === 0 || state.layers.length === 0) {
         return;
       }
+
+      sketch.rotate(state.angle);
 
       var index = 0;
       for (var y = -maxWH; y <= maxWH; y += totalHeight) {
@@ -129,10 +132,17 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         state.layers.forEach((layer) => {
           const thisHeight = calcHeight(layer);
 
+          console.log("total", totalHeight)
+          console.log("layer", thisHeight)
+          console.log("yoff", yoff)
+
           // Draw background rectangle
           sketch.fill(layer.bgColor);
-          sketch.strokeWeight(0);
+          sketch.strokeWeight(layer.hspace * layer.vspace > 0 ? 1 : 0);
+          sketch.stroke(layer.bgColor);
           sketch.rect(-maxWH, y + yoff, 2 * maxWH, thisHeight);
+
+          console.log("rect at", y + yoff, thisHeight)
 
           // If no other decoration then return
           if (layer.state == LayerState.NONE) {
@@ -144,10 +154,11 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
           const hOffset = calcWidth(layer);
 
           // Offset from the last row of the same layer
-          const rowOffset = layer.rowoff <= 1 ? hOffset : hOffset / layer.rowoff;
+          const rowOffset = layer.rowoff <= 1 ? 0 : hOffset / layer.rowoff;
 
           // Draw the elements along the layer
           for (var x = -maxWH - (index % layer.rowoff) * rowOffset; x <= maxWH; x += hOffset) {
+            console.log("layer at", y + layer.vspace + yoff)
             drawLayer(layer, x + layer.hspace, y + layer.vspace + yoff);
           }
 

@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        "sm": "435px"
+      },
       colors: {
         pri: "#foe3d7",
         sec: "#e8e4d5",
@@ -30,14 +33,14 @@ module.exports = {
       themes: {
         light: {
           colors: {
-            background: "#foe3d7", // or DEFAULT
+            background: "#f0e3d7", // or DEFAULT
             foreground: "#e8e4d5", // or 50 to 900 DEFAULT
             primary: "#ffc700",
           },
         },
         dark: {
           colors: {
-            background: "#foe3d7",
+            background: "#f0e3d7",
             foreground: "#e8e4d5", // or 50 to 900 DEFAULT
             primary: {
               //... 50 to 900

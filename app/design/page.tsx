@@ -109,7 +109,7 @@ export default function Design() {
   }
 
   return (
-    <main className={styles.container}>
+    <main className="flex flex-row justify-between items-top w-full h-full p-3 gap-x-3">
       <Webbing state={webbingState} />
       <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
     </main>

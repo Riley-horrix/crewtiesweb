@@ -32,8 +32,8 @@ interface Props {
  */
 export default function Webbing({ state }: Props) {
   return (
-    <div className={styles.container}>
-      <P5jsContainer sketch={webbingSketch(state)} className={styles.webbing} />
+    <div className="flex flex-row justify-centre">
+      <P5jsContainer sketch={webbingSketch(state)} className="w-[100px] h-[600px] border border-accent background-foreground" />
     </div>
   );
 }

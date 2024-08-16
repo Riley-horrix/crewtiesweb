@@ -50,7 +50,7 @@ export default function DesignSlider({ label, min, max, step = undefined, start 
       // onChange={setVal}
       onChangeEnd={onChangeFunc}
       classNames={{
-        base: "max-w-lg",
+        base: "w-full",
         // thumb: "bg-white border-2 border-accent",
         track: "bg-ter",
         // filler: "bg-accent"

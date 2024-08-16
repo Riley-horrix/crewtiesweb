@@ -38,6 +38,26 @@ export function fontEnumToString(e: WebbingFonts) {
   }
 }
 
+export function stringToFontEnum(e: string) {
+  switch (e) {
+    case "0":
+      return WebbingFonts.arial;
+
+    case "1":
+      return WebbingFonts.timesNewRoman;
+
+    default:
+      throw "[webbing fonts] unexpexted string to font enum value : " + e
+  }
+}
+
+export function allWebbingFonts() {
+  return [
+    WebbingFonts.arial,
+    WebbingFonts.timesNewRoman,
+  ]
+}
+
 /**
  * Interface to represent a single layer of the webbing design.
  * @member id A unique string id for the layer.
@@ -90,13 +110,13 @@ export const emptyLayerState: () => WebbingLayer = () => {
     hspace: 5,
     vspace: 5,
     size: 50,
-    rowoff: 0,
+    rowoff: 1,
     bgColor: "#FFFFFF",
     state: LayerState.NONE,
     img: "",
     text: "",
     font: WebbingFonts.timesNewRoman,
-    fontColor: "",
+    fontColor: "#000000",
     bold: false
   }
 }
