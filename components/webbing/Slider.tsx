@@ -9,7 +9,7 @@
  * 
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slider, SliderValue } from "@nextui-org/slider";
 import { Tooltip } from "@nextui-org/react";
 
@@ -22,19 +22,23 @@ interface Props {
   label: string,
   min: number,
   max: number,
+  init?: number,
   step?: number,
   start?: number,
-  init?: number,
   marks?: Mark[],
   valueDisplay?: (arg0: SliderValue) => string,
   onChangeFunc?: (arg0: SliderValue) => void,
-  tooltip: string
+  tooltip: string,
 }
 
-export default function DesignSlider({ label, min, max, step = undefined, start = undefined, init = undefined, marks = undefined, valueDisplay = undefined, onChangeFunc = undefined, tooltip = "" }: Props) {
+export default function DesignSlider({ label, min, max, step = undefined, start = undefined, init = 0, marks = undefined, valueDisplay = undefined, onChangeFunc = undefined, tooltip = "" }: Props) {
 
-  // const [val, setVal] = useState(init);
+  const [val, setVal] = useState<number>(init);
   const [ttOpen, setTTOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setVal(init);
+  }, [init])
 
   return (
     <Slider
@@ -42,17 +46,19 @@ export default function DesignSlider({ label, min, max, step = undefined, start 
       size="md"
       color="primary"
       step={step}
+      value={val}
       maxValue={max}
       minValue={min}
       fillOffset={start}
       defaultValue={init}
+      onChange={(val) => { setVal(typeof val === "number" ? val : 0) }}
       getValue={valueDisplay}
       // onChange={setVal}
       onChangeEnd={onChangeFunc}
       classNames={{
         base: "w-full",
         // thumb: "bg-white border-2 border-accent",
-        track: "bg-ter",
+        // track: "bg-ter",
         // filler: "bg-accent"
       }}
       renderLabel={({ children, ...props }) => (

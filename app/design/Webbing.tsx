@@ -10,9 +10,6 @@
  * Copyright (c) Riley Horrix 2024
  * 
  */
-
-import styles from "./Webbing.module.css";
-
 import { webbingSketch } from "@/lib/webbingSketch"
 import WebbingState from "@/lib/webbingState";
 
@@ -33,7 +30,7 @@ interface Props {
 export default function Webbing({ state }: Props) {
   return (
     <div className="flex flex-row justify-centre">
-      <P5jsContainer sketch={webbingSketch(state)} className="w-[100px] h-[600px] border border-accent background-foreground" />
+      <P5jsContainer sketch={webbingSketch(state)} className="w-[100px] h-[600px] border border-accent background-white" />
     </div>
   );
 }

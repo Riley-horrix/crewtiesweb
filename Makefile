@@ -10,6 +10,12 @@ test: deps
 server: deps
 	@ npm run dev
 
+server-noinstall:
+	@ npm run dev
+
+server-network: @deps
+	@ npm run dev -- -H 192.168.1.233
+
 deps:
 	@ npm i
 
