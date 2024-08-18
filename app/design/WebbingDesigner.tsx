@@ -72,7 +72,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
         console.log("render")
         return (
           <div className="py-3 w-full flex flex-col">
-            <Input type="text" label="Webbing Text" variant="flat" placeholder="Webbing Text Here..." onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
+            <Input type="text" label="Webbing Text" variant="flat" placeholder="Webbing Text Here..." value={selectedLayer.text} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
             <div className="w-full flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 justify-between items-center py-3">
               <FontSelect changeFont={(val) => { stateFuncs.editLayer(selectedLayerId, "font", val) }} font={selectedLayer.font} className="w-full sm:w-1/2" />
               <Input size="md" type="color" label="Font Color" variant="flat" placeholder={selectedLayer.bgColor} onChange={((val) => stateFuncs.editLayer(selectedLayerId, "fontColor", val.target.value))} classNames={{ base: "w-full sm:w-1/2", label: "text-lg" }} defaultValue={selectedLayer.fontColor} />
@@ -86,6 +86,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
         return (
           <div className="py-3 w-full flex flex-col">
             <ImageUpload setImageData={(val) => stateFuncs.editLayer(selectedLayerId, "img", val)} />
+            <Button color="danger" className="w-full mt-3" onPress={() => setLayerState(LayerState.NONE)}>Remove Logo</Button>
           </div>
         )
     }
@@ -96,17 +97,17 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
       {/* TODO - change to a custom input field. */}
       <h1><i>{state.name}</i>{' '}<i className="bi bi-pencil-square"></i></h1>
       <HorizontalDivider />
-      <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(val) }} tooltip="The angle that the design is rotated on the webbing." />
+      <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
       <HorizontalDivider />
       <div className="flex sm:flex-row sm:px-0 px-3 justify-between w-full flex-col">
         <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} className="mb-3 sm:mb-0" />
         <Button endContent={<i className="bi bi-plus-circle-fill"></i>} onPress={() => { const layer = newlayer(); stateFuncs.appendLayer(layer); setSelectedLayerId(layer.id); }}>Add new layer</Button>
       </div>
-      {selectedLayerId && selectedLayer && (
+      {selectedLayerId && selectedLayer != defaultLayer && (
         <div className="w-full mt-2">
           <WebbingSlider label="Horizontal Spacing" min={0} max={50} step={1} init={selectedLayer.hspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "hspace", val) }} tooltip="The horizontal space between elements in this layer." />
           <WebbingSlider label="Vertical Spacing" min={0} max={50} step={1} init={selectedLayer.vspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "vspace", val) }} tooltip="The vertical space between other layers and this layer." />
-          <WebbingSlider label="Size" min={10} max={200} step={1} init={selectedLayer.size} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "size", val) }} tooltip="The text font size or the width of the image on the webbing." />
+          <WebbingSlider label="Size" min={2} max={200} step={1} init={selectedLayer.size} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "size", val) }} tooltip="The text font size or the width of the image on the webbing." />
           <WebbingSlider label="Row Offset" min={1} max={10} step={1} init={selectedLayer.rowoff} valueDisplay={(num) => `${num} rows`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "rowoff", val) }} tooltip="How many rows it takes for this layer to repeat itself. (WARNING can cause design to become non-repeating)" />
           {/* TODO : if you drag picker it re-renders webbing multiple times. */}
           <Input size="md" type="color" label="Background Color" variant="flat" placeholder={selectedLayer.bgColor} onValueChange={(val) => setLayerBackground(val)} classNames={{ base: "max-w-lg my-3", label: "text-lg" }} defaultValue={selectedLayer.bgColor} value={selectedLayer.bgColor} />
@@ -114,7 +115,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
             <Button startContent={<i className="bi bi-fonts"></i>} className="mb-3 sm:mb-0" onPress={() => setLayerState(LayerState.TEXT)}>Use Text</Button>
             <Button startContent={<i className="bi bi-image"></i>} onPress={() => setLayerState(LayerState.LOGO)}>Use Logo</Button>
           </div>
-          {renderAdvancedEditor()}
+          {renderAdvancedEditor() || <Button color="danger" className="w-full mt-3" onPress={() => stateFuncs.removeLayer(selectedLayerId)}>Remove Layer</Button>}
         </div>
       )}
     </div>
@@ -219,8 +220,7 @@ interface ImageUploadProps {
 
 function ImageUpload(props: ImageUploadProps) {
 
-  const onUpload = (image: File) => {
-
+  const onUpload = (image: File | null) => {
     if (!image) return;
 
     // check if the file selected is not an image file
@@ -237,7 +237,7 @@ function ImageUpload(props: ImageUploadProps) {
     fileReader.readAsDataURL(image);
 
     fileReader.onload = (fileReaderEvent) => {
-      props.setImageData(fileReaderEvent.target?.result)
+      props.setImageData(typeof fileReaderEvent.target?.result == "string" ? fileReaderEvent.target.result : "")
     }
   }
   return (

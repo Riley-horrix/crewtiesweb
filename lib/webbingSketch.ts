@@ -162,12 +162,18 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
           const rowOffset = layer.rowoff <= 1 ? 0 : hOffset / layer.rowoff;
 
           // Calculate offsets
+          // const totalRowOffset = (index % layer.rowoff) * rowOffset;
+          // const angleCorrectOffset = Math.abs(index * (thisHeight * sketch.sin(state.angle)));
+
           const totalRowOffset = (index % layer.rowoff) * rowOffset;
-          const angleCorrectOffset = Math.abs(index * (thisHeight * sketch.sin(state.angle)));
+          // const angleCorrectOffset = -index * sketch.sin(state.angle) * thisHeight;
+          const angleCorrectOffset = 0;
+
+          const totalOffset = (totalRowOffset + angleCorrectOffset) % calcWidth(layer);
 
           // Draw the elements along the layer
           // for (var x = -maxWH - totalRowOffset - angleCorrectOffset; x <= maxWH; x += hOffset) {
-          for (var x = -maxWH - totalRowOffset; x <= maxWH; x += hOffset) {
+          for (var x = -maxWH - totalOffset; x <= maxWH; x += hOffset) {
             drawLayer(layer, x + layer.hspace, y + layer.vspace + yoff);
           }
 
@@ -175,7 +181,8 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         })
         index += 1;
       }
-      // sketch.circle(0, 0, 20);
+      sketch.stroke(0);
+      sketch.circle(0, 0, 20);
       sketch.pop();
     }
   })

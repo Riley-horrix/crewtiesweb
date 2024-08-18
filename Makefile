@@ -13,7 +13,7 @@ server: deps
 server-noinstall:
 	@ npm run dev
 
-server-network: @deps
+server-network: deps
 	@ npm run dev -- -H 192.168.1.233
 
 deps:

@@ -35,7 +35,7 @@ export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
         // Import p5 client side and create sketch
         const p5 = (await import("p5")).default;
         new p5((p) => {
-          sketch(p, parentRef.current);
+          sketch(p, parentRef.current ? parentRef.current : new HTMLDivElement());
           setp5(p);
         });
       } catch (error) {
