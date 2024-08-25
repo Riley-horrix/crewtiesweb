@@ -1,0 +1,40 @@
+name: Deploy to raspberry pi
+run-name: "${{ github.actor }} :: deploying onto raspberry pi"
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Use Nodejs
+        uses: actions/setup-node@v4
+      - name: Install dependencies
+      - run: npm install
+      - name: Package project
+      - run: npm run build
+      - name: Run test suite
+      - run: npm test
+      - name: Run linting
+      - run: npm run lint
+      
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Use Nodejs
+      uses: actions/setup-node@v4
+    - name: Install dependencies
+    - run: npm install
+    - name: Package project
+    - run: npm run build
+    - name: Deploy project
+    - run: npm run start
+        
+      
+  
