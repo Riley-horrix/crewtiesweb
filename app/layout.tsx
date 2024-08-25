@@ -18,7 +18,7 @@ import "./globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import styles from "./layout.module.css";
-import Logo from "@/components/Logo";
+import Logo from "../components/Logo";
 
 const font = Roboto_Slab({ subsets: ["latin"] });
 

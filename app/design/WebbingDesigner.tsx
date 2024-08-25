@@ -10,8 +10,8 @@
  * 
  */
 
-import WebbingState, { allWebbingFonts, emptyLayerState, fontEnumToString, LayerState, stringToFontEnum, WebbingFonts, WebbingLayer } from "@/lib/webbingState"
-import { StateFuncs } from "@/app/design/page"
+import WebbingState, { allWebbingFonts, emptyLayerState, fontEnumToString, LayerState, stringToFontEnum, WebbingFonts, WebbingLayer } from "../../lib/webbingState"
+import { StateFuncs } from "./page"
 
 import React, { useState } from "react";
 import { Button, Checkbox, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, SharedSelection, Slider } from "@nextui-org/react";

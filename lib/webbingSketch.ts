@@ -1,6 +1,6 @@
 
 import p5Types from "p5";
-import WebbingState, { fontEnumToString, LayerState, WebbingLayer } from "./webbingState";
+import WebbingState, { fontEnumToString, LayerState, WebbingLayer } from "./webbingState.ts";
 
 type P5jsContainerRef = HTMLDivElement;
 type P5jsSketch = (p: p5Types, parentRef: P5jsContainerRef) => void;
