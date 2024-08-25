@@ -10,8 +10,8 @@
  * Copyright (c) Riley Horrix 2024
  * 
  */
-import { webbingSketch } from "@/lib/webbingSketch"
-import WebbingState from "@/lib/webbingState";
+import { webbingSketch } from "@/lib/WebbingSketch"
+import WebbingState from "@/lib/WebbingState";
 
 import { P5jsContainer } from "@/components/P5jsContainer";
 

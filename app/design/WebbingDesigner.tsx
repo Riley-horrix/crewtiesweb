@@ -10,7 +10,7 @@
  * 
  */
 
-import WebbingState, { allWebbingFonts, emptyLayerState, fontEnumToString, LayerState, stringToFontEnum, WebbingFonts, WebbingLayer } from "../../lib/webbingState"
+import WebbingState, { allWebbingFonts, emptyLayerState, fontEnumToString, LayerState, stringToFontEnum, WebbingFonts, WebbingLayer } from "@/lib/WebbingState"
 import { StateFuncs } from "./page"
 
 import React, { useState } from "react";

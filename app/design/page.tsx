@@ -14,7 +14,7 @@
 import Webbing from "@/app/design/Webbing";
 import WebbingDesigner from "@/app/design/WebbingDesigner";
 
-import { WebbingLayer, emptyWebbingState } from "@/lib/webbingState";
+import { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
 
 import { useState } from "react";
 
