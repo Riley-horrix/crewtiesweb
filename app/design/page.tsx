@@ -13,6 +13,7 @@
 
 import Webbing from "@/app/design/Webbing";
 import WebbingDesigner from "@/app/design/WebbingDesigner";
+import Header from "@/components/Header";
 
 import { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
 
@@ -107,9 +108,12 @@ export default function Design() {
   }
 
   return (
-    <main className="flex flex-row justify-between items-top w-full h-full p-3 gap-x-3">
-      <Webbing state={webbingState} />
-      <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
+    <main className="light text-foreground bg-background">
+      <Header />
+      <div className="flex flex-row justify-between items-top w-full h-full p-3 gap-x-3">
+        <Webbing state={webbingState} />
+        <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
+      </div>
     </main>
   );
 }

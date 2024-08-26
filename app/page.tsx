@@ -1,3 +1,4 @@
+"use client";
 /**
  * @file page.tsx
  * @author Riley Horrix (riley@horrix.com)
@@ -9,6 +10,7 @@
  * 
  */
 
+import Header from "@/components/Header";
 import Link from "next/link";
 
 /**
@@ -16,9 +18,10 @@ import Link from "next/link";
  */
 export default function Home() {
   return (
-    <>
+    <main className="light text-foreground bg-background">
+      <Header />
       <h1>Home</h1>
       <Link href={"/design"}>To Design</Link>
-    </>
+    </main>
   )
 }

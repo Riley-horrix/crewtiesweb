@@ -3,38 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --fontcol: #202020;
-  --bgpri: #f0e3d7;
-  --bgsec: #e8e4d5;
-  --bgter: #8d8d8d;
-  --accent: #ffc700;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --fontcol: #e2e2e2;
-    --bgpri: #4a4a4a;
-    --bgsec: #6e6e6e; */
-  }
-}
-
-html,
-body,
-h1,
-h2,
-h3,
-p {
-  margin: 0;
   padding: 0;
-  color: var(--fontcol);
-  background: var(--bgpri);
+  margin: 0;
 }
+
+@media (prefers-color-scheme: dark) {}
 
 body {
-  height: 100vh;
-}
-
-a {
-  color: var(--fontcol);
-  text-decoration: none;
+  min-height: 100vh;
 }
