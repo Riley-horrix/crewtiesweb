@@ -1,10 +1,12 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Link, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Link, NavbarMenu, NavbarMenuItem, Button } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import CrewtiesLogo from "./CrewtiesLogo";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const path = usePathname();
   const menuItems = [
     "Home",
     "Contact",
@@ -18,7 +20,22 @@ export default function Header() {
       onMenuOpenChange={setIsMenuOpen}
       position="sticky"
       classNames={{
-        "base": "dark"
+        "base": "dark",
+        "item": [
+          "flex",
+          "relative",
+          "h-full",
+          "items-center",
+          "data-[active=true]:after:content-['']",
+          "data-[active=true]:after:absolute",
+          "data-[active=true]:after:bottom-0",
+          "data-[active=true]:after:left-[-25%]",
+          "data-[active=true]:after:right-0",
+          "data-[active=true]:after:h-[6px]",
+          "data-[active=true]:after:w-[150%]",
+          "data-[active=true]:after:rounded-[2px]",
+          "data-[active=true]:after:bg-secondary",
+        ]
       }}
     >
       <NavbarContent className="sm:hidden" justify="start">
@@ -27,41 +44,30 @@ export default function Header() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <CrewtiesLogo width={150} />
+          <CrewtiesLogo width={200} />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="end">
+      <NavbarContent className="hidden sm:flex gap-7" justify="end">
         <NavbarBrand>
-          <CrewtiesLogo width={150} />
+          <CrewtiesLogo width={200} />
         </NavbarBrand>
-        <NavbarItem>
+        <NavbarItem isActive={path.endsWith("/")}>
           <Link color="foreground" href="/">
             Home
           </Link>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem isActive={path.startsWith("/contact")}>
           <Link color="foreground" href="/contact">
             Contact
           </Link>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem isActive={path.startsWith("/design")}>
           <Link color="foreground" href="/design">
             Design
           </Link>
         </NavbarItem>
       </NavbarContent>
-
-      {/* <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent> */}
 
       <NavbarMenu>
         {menuItems.map((item, index) => (
