@@ -34,7 +34,7 @@ const defaultLayer = emptyLayerState();
 export default function WebbingDesigner({ state, stateFuncs }: Props) {
   const layerIds = state.layers.map((item) => item.id);
   const newLayerId = () => {
-    var id = layerIds.length;
+    var id = layerIds.length + 1;
 
     // Check to see if user is trying to be naughty
     while (layerIds.some((item) => item === ("Layer " + id.toString()))) {
@@ -74,7 +74,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
           <div className="py-3 w-full flex flex-col">
             <Input type="text" label="Webbing Text" variant="flat" placeholder="Webbing Text Here..." value={selectedLayer.text} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
             <div className="w-full flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 justify-between items-center py-3">
-              <FontSelect changeFont={(val) => { stateFuncs.editLayer(selectedLayerId, "font", val) }} font={selectedLayer.font} className="w-full sm:w-1/2" />
+              <FontSelect changeFont={(val) => { stateFuncs.editLayer(selectedLayerId, "font", val) }} font={selectedLayer.font} className="w-full sm:w-1/2 sm:mr-[5vw]" />
               <Input size="md" type="color" label="Font Color" variant="flat" placeholder={selectedLayer.bgColor} onChange={((val) => stateFuncs.editLayer(selectedLayerId, "fontColor", val.target.value))} classNames={{ base: "w-full sm:w-1/2", label: "text-lg" }} defaultValue={selectedLayer.fontColor} />
             </div>
             <Checkbox color="primary" classNames={{ base: "mb-2", label: "text-black" }} isSelected={selectedLayer.bold} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "bold", val) }}>Bold</Checkbox>

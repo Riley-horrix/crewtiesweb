@@ -16,6 +16,7 @@ import WebbingDesigner from "@/app/design/WebbingDesigner";
 import Header from "@/components/Header";
 
 import { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
+import { Divider } from "@nextui-org/react";
 
 import { useState } from "react";
 
@@ -110,10 +111,12 @@ export default function Design() {
   return (
     <main className="light text-foreground bg-background">
       <Header />
-      <div className="flex flex-row justify-between items-top w-full h-full p-3 gap-x-3">
+      <div className="flex flex-row justify-between items-top h-full p-3 gap-x-[3vw] max-w-[700px] mx-auto">
         <Webbing state={webbingState} />
         <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
       </div>
+      <Divider />
+      <h1 className="p-5 text-lg">Check out community designs... (coming soon)</h1>
     </main>
   );
 }
