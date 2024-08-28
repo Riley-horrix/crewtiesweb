@@ -96,10 +96,12 @@ export interface WebbingLayer {
 
 // An empty WebbingState object
 export const emptyWebbingState: () => WebbingState = () => {
+  const layer = emptyLayerState()
+  layer.id = "Layer 1";
   return {
     name: "My Design",
     angle: 0,
-    layers: []
+    layers: [layer]
   }
 }
 
@@ -111,7 +113,7 @@ export const emptyLayerState: () => WebbingLayer = () => {
     vspace: 5,
     size: 50,
     rowoff: 1,
-    bgColor: "#FFFFFF",
+    bgColor: "#f1f1f1",
     state: LayerState.NONE,
     img: "",
     text: "",

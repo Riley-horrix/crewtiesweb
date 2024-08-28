@@ -48,7 +48,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
     return emptyLayer;
   }
 
-  const [selectedLayerId, setSelectedLayerId] = useState<string>("");
+  const [selectedLayerId, setSelectedLayerId] = useState<string>(state.layers.length !== 0 ? state.layers[0].id : "");
 
   const layers = state.layers.filter((layer) => layer.id == selectedLayerId);
   const selectedLayer = layers.length ? layers[0] : defaultLayer;
@@ -126,12 +126,12 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
       <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
       <Divider className="my-[10px]" />
       <div className="flex sm:flex-row sm:px-0 px-3 justify-between w-full flex-col">
-        <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} className="mb-3 sm:mb-0" />
-        <Button onPress={() => moveLayer(Direction.UP)}><i className="bi bi-up"></i></Button>
-        <Button onPress={() => moveLayer(Direction.DOWN)}><i className="bi bi-down"></i></Button>
+        <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} start={selectedLayerId} className="mb-3 sm:mb-0" />
+        <Button className="mb-3 sm:mb-0" onPress={() => moveLayer(Direction.UP)}><i className="bi bi-chevron-up"></i></Button>
+        <Button className="mb-3 sm:mb-0" onPress={() => moveLayer(Direction.DOWN)}><i className="bi bi-chevron-down"></i></Button>
         <Button endContent={<i className="bi bi-plus-circle-fill"></i>} onPress={() => { const layer = newlayer(); stateFuncs.appendLayer(layer); setSelectedLayerId(layer.id); }}>Add new layer</Button>
       </div>
-      {selectedLayerId && selectedLayer != defaultLayer && (
+      {selectedLayerId && selectedLayer.id !== "" && (
         <div className="w-full mt-2">
           <WebbingSlider label="Horizontal Spacing" min={0} max={50} step={1} init={selectedLayer.hspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "hspace", val) }} tooltip="The horizontal space between elements in this layer." />
           <WebbingSlider label="Vertical Spacing" min={0} max={50} step={1} init={selectedLayer.vspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "vspace", val) }} tooltip="The vertical space between other layers and this layer." />
@@ -201,11 +201,12 @@ function FontSelect(props: FontSelectProps) {
 interface LayerSelectProps {
   layers: string[],
   className?: string,
-  selectLayer: (arg0: string) => void
+  selectLayer: (arg0: string) => void,
+  start?: string
 }
 
-function LayerSelect({ layers, selectLayer, className = "" }: LayerSelectProps) {
-  const [selectedValue, setSelected] = useState("Select Layer");
+function LayerSelect({ layers, selectLayer, className = "", start = "" }: LayerSelectProps) {
+  const [selectedValue, setSelected] = useState(start === "" ? "Select Layer" : start);
 
   const handleSelectLayer = (val: SharedSelection) => {
     const value = val.currentKey ? val.currentKey : "Select Layer";
