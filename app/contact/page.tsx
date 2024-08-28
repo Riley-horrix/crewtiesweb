@@ -23,7 +23,7 @@ export default function Contact() {
           <h2 className="italic text-2xl mt-3">...or just want to replace your cheap, old boat straps with something higher quality? </h2>
           <Divider className="my-3"/>
           <h3 className="text-xl">Send our enquiries team an email and we will get back to you as soon as possible!</h3>
-          <div className="text-left mt-5"><i className="mr-[5px] bi bi-envelope-fill"></i>enquiries@crewties.co.uk</div>
+          <div className="text-left mt-5 flex flex-row items-center"><i className="mr-[10px] text-xl bi bi-envelope-fill"></i>enquiries@crewties.co.uk</div>
         </div>
       </div>
     </main>
