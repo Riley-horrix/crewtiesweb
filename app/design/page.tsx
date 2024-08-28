@@ -56,6 +56,13 @@ export interface StateFuncs {
    * @param arg0 The new angle.
    */
   setWebbingAnlge: (arg0: number) => void
+  /**
+   * Add a webbing layer at the specified index.
+   * @param arg0 The webbing layer to move
+   * @param arg1 The new index for the layer
+   * @returns void
+   */
+  moveLayerToIndex: (arg0: string, arg1: number) => void
 }
 
 /**
@@ -84,6 +91,28 @@ export default function Design() {
       });
     })
   }
+  const moveLayerToIndex: (arg0: string, arg1: number) => void = (layerId, index) => {
+    setLayers((prev) => {
+      const selectedLayers = prev.filter((thisLayer) => thisLayer.id == layerId);
+      if (selectedLayers.length === 0){ return prev; }
+      const layerToChange = selectedLayers[0];
+      const oldLayers: WebbingLayer[] = prev.filter((prevLayer) => prevLayer.id !== layerId);
+      if (index === (prev.length - 1)) {
+        oldLayers.push(layerToChange);
+        return oldLayers;
+      }
+      const newLayers: WebbingLayer[] = [];
+      oldLayers.forEach((layer, layerIndex) => {
+        if (layerIndex === index){
+          newLayers.push(layerToChange);
+        }
+        if (layer.id !== layerId) {
+          newLayers.push(layer);
+        }
+      })
+      return newLayers;
+    });
+  }
   const removeLayer: (arg0: string) => void = (layerId) => {
     setLayers((prev) => prev.filter((item) => item.id !== layerId));
   }
@@ -99,7 +128,8 @@ export default function Design() {
     editLayer,
     removeLayer,
     setWebbingName,
-    setWebbingAnlge
+    setWebbingAnlge,
+    moveLayerToIndex
   }
 
   const webbingState = {

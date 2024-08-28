@@ -14,8 +14,7 @@ import WebbingState, { allWebbingFonts, emptyLayerState, fontEnumToString, Layer
 import { StateFuncs } from "./page"
 
 import React, { useState } from "react";
-import { Button, Checkbox, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, SharedSelection, Slider } from "@nextui-org/react";
-import HorizontalDivider from "@/components/HorizontalDivider";
+import { Button, Checkbox, Divider, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input, SharedSelection, Slider } from "@nextui-org/react";
 import WebbingSlider from "@/components/webbing/Slider";
 
 interface Props {
@@ -62,6 +61,33 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
     stateFuncs.editLayer(selectedLayerId, "bgColor", bg);
   }
 
+  enum Direction {
+    UP,
+    DOWN
+  }
+
+  const moveLayer = (dir: Direction) => {
+    const foundIndex = state.layers.findIndex((layer) => layer.id === selectedLayerId);
+    
+    // This is disgusting and I hate it
+    const index = 
+      foundIndex === -1 ?
+        0 :
+        (dir === Direction.DOWN ? 
+          (foundIndex === (state.layers.length - 1) ? 
+            (state.layers.length - 1) :
+            foundIndex + 1
+          ) : 
+          (foundIndex === 0 ?
+            0 :
+            foundIndex - 1
+          )
+        )
+
+    console.log("index", index);
+    stateFuncs.moveLayerToIndex(selectedLayerId, index);
+  }
+
   const renderAdvancedEditor = () => {
     if (!selectedLayer) return;
     switch (selectedLayer.state) {
@@ -95,12 +121,14 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
   return (
     <div className="flex flex-col items-center justify-start w-full">
       {/* TODO - change to a custom input field. */}
-      <h1><i>{state.name}</i>{' '}<i className="bi bi-pencil-square"></i></h1>
-      <HorizontalDivider />
+      <h1 className="text-3xl mt-[10px]"><i>{state.name}</i>{' '}<i className="bi bi-pencil-square"></i></h1>
+      <Divider className="my-[10px]" />
       <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
-      <HorizontalDivider />
+      <Divider className="my-[10px]" />
       <div className="flex sm:flex-row sm:px-0 px-3 justify-between w-full flex-col">
         <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} className="mb-3 sm:mb-0" />
+        <Button onPress={() => moveLayer(Direction.UP)}><i className="bi bi-up"></i></Button>
+        <Button onPress={() => moveLayer(Direction.DOWN)}><i className="bi bi-down"></i></Button>
         <Button endContent={<i className="bi bi-plus-circle-fill"></i>} onPress={() => { const layer = newlayer(); stateFuncs.appendLayer(layer); setSelectedLayerId(layer.id); }}>Add new layer</Button>
       </div>
       {selectedLayerId && selectedLayer != defaultLayer && (
