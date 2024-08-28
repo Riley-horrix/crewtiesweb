@@ -97,11 +97,11 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
       case LayerState.TEXT:
         console.log("render")
         return (
-          <div className="py-3 w-full flex flex-col">
-            <Input type="text" label="Webbing Text" variant="flat" placeholder="Webbing Text Here..." value={selectedLayer.text} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
-            <div className="w-full flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 justify-between items-center py-3">
+          <div className="mt-3 w-full flex flex-col">
+            <Input color="primary" type="text" label="Webbing Text" variant="flat" placeholder="Webbing Text Here..." value={selectedLayer.text} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
+            <div className="w-full flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 justify-between items-center mt-3 mb-1">
               <FontSelect changeFont={(val) => { stateFuncs.editLayer(selectedLayerId, "font", val) }} font={selectedLayer.font} className="w-full sm:w-1/2 sm:mr-[5vw]" />
-              <Input size="md" type="color" label="Font Color" variant="flat" placeholder={selectedLayer.bgColor} onChange={((val) => stateFuncs.editLayer(selectedLayerId, "fontColor", val.target.value))} classNames={{ base: "w-full sm:w-1/2", label: "text-lg" }} defaultValue={selectedLayer.fontColor} />
+              <Input size="md" type="color" color="primary" label="Font Color" variant="flat" placeholder={selectedLayer.bgColor} onChange={((val) => stateFuncs.editLayer(selectedLayerId, "fontColor", val.target.value))} classNames={{ base: "w-full sm:w-1/2", label: "text-lg" }} defaultValue={selectedLayer.fontColor} />
             </div>
             <Checkbox color="primary" classNames={{ base: "mb-2", label: "text-black" }} isSelected={selectedLayer.bold} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "bold", val) }}>Bold</Checkbox>
             <Button color="danger" className="w-full" onPress={() => stateFuncs.editLayer(selectedLayerId, "state", LayerState.NONE)}>Remove Text</Button>
@@ -110,9 +110,9 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
 
       case LayerState.LOGO:
         return (
-          <div className="py-3 w-full flex flex-col">
+          <div className="w-full flex flex-col gap-y-3">
             <ImageUpload setImageData={(val) => stateFuncs.editLayer(selectedLayerId, "img", val)} />
-            <Button color="danger" className="w-full mt-3" onPress={() => setLayerState(LayerState.NONE)}>Remove Logo</Button>
+            <Button color="danger" className="w-full" onPress={() => setLayerState(LayerState.NONE)}>Remove Logo</Button>
           </div>
         )
     }
@@ -122,26 +122,28 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
     <div className="flex flex-col items-center justify-start w-full">
       {/* TODO - change to a custom input field. */}
       <h1 className="text-3xl mt-[10px]"><i>{state.name}</i>{' '}<i className="bi bi-pencil-square"></i></h1>
-      <Divider className="my-[10px]" />
+      <Divider className="my-3 bg-secondary" />
       <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
-      <Divider className="my-[10px]" />
-      <div className="flex sm:flex-row sm:px-0 px-3 justify-between w-full flex-col">
-        <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} start={selectedLayerId} className="mb-3 sm:mb-0" />
-        <Button className="mb-3 sm:mb-0" onPress={() => moveLayer(Direction.UP)}><i className="bi bi-chevron-up"></i></Button>
-        <Button className="mb-3 sm:mb-0" onPress={() => moveLayer(Direction.DOWN)}><i className="bi bi-chevron-down"></i></Button>
-        <Button endContent={<i className="bi bi-plus-circle-fill"></i>} onPress={() => { const layer = newlayer(); stateFuncs.appendLayer(layer); setSelectedLayerId(layer.id); }}>Add new layer</Button>
+      <Divider className="my-3 bg-secondary" />
+      <div className="flex sm:flex-row sm:px-0 px-3 gap-3 sm:gap-0 justify-between w-full flex-col">
+        <LayerSelect layers={layerIds} selectLayer={(layer) => { setSelectedLayerId(layer); }} start={selectedLayerId} />
+        <div className="flex flex-row justify-between gap-x-[2vw]">
+          <Button color="primary" onPress={() => moveLayer(Direction.UP)}><i className="bi bi-chevron-up"></i></Button>
+          <Button color="primary" onPress={() => moveLayer(Direction.DOWN)}><i className="bi bi-chevron-down"></i></Button>
+        </div>
+        <Button color="primary" endContent={<i className="bi bi-plus-circle-fill"></i>} onPress={() => { const layer = newlayer(); stateFuncs.appendLayer(layer); setSelectedLayerId(layer.id); }}>Add new layer</Button>
       </div>
       {selectedLayerId && selectedLayer.id !== "" && (
-        <div className="w-full mt-2">
+        <div className="w-full mt-3 gap-3">
           <WebbingSlider label="Horizontal Spacing" min={0} max={50} step={1} init={selectedLayer.hspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "hspace", val) }} tooltip="The horizontal space between elements in this layer." />
           <WebbingSlider label="Vertical Spacing" min={0} max={50} step={1} init={selectedLayer.vspace} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "vspace", val) }} tooltip="The vertical space between other layers and this layer." />
           <WebbingSlider label="Size" min={2} max={200} step={1} init={selectedLayer.size} valueDisplay={(num) => `${num}`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "size", val) }} tooltip="The text font size or the width of the image on the webbing." />
           <WebbingSlider label="Row Offset" min={1} max={10} step={1} init={selectedLayer.rowoff} valueDisplay={(num) => `${num} rows`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "rowoff", val) }} tooltip="How many rows it takes for this layer to repeat itself. (WARNING can cause design to become non-repeating)" />
           {/* TODO : if you drag picker it re-renders webbing multiple times. */}
-          <Input size="md" type="color" label="Background Color" variant="flat" placeholder={selectedLayer.bgColor} onValueChange={(val) => setLayerBackground(val)} classNames={{ base: "max-w-lg my-3", label: "text-lg" }} defaultValue={selectedLayer.bgColor} value={selectedLayer.bgColor} />
-          <div className="flex flex-col sm:flex-row justify-around w-full mt-2 px-3 sm:px-0">
-            <Button startContent={<i className="bi bi-fonts"></i>} className="mb-3 sm:mb-0" onPress={() => setLayerState(LayerState.TEXT)}>Use Text</Button>
-            <Button startContent={<i className="bi bi-image"></i>} onPress={() => setLayerState(LayerState.LOGO)}>Use Logo</Button>
+          <Input color="primary" size="md" type="color" label="Background Color" variant="flat" placeholder={selectedLayer.bgColor} onValueChange={(val) => setLayerBackground(val)} classNames={{ base: "max-w-lg my-3", label: "text-lg" }} defaultValue={selectedLayer.bgColor} value={selectedLayer.bgColor} />
+          <div className="flex flex-row justify-around w-full mt-2 sm:px-0 gap-x-[10px]">
+            <Button color="primary" startContent={<i className="bi bi-fonts"></i>} onPress={() => setLayerState(LayerState.TEXT)}><p className="hidden xs:block">Use Text</p></Button>
+            <Button color="primary" startContent={<i className="bi bi-image"></i>} onPress={() => setLayerState(LayerState.LOGO)}><p className="hidden xs:block">Use Logo</p></Button>
           </div>
           {renderAdvancedEditor() || <Button color="danger" className="w-full mt-3" onPress={() => stateFuncs.removeLayer(selectedLayerId)}>Remove Layer</Button>}
         </div>
@@ -172,6 +174,7 @@ function FontSelect(props: FontSelectProps) {
     <Dropdown>
       <DropdownTrigger>
         <Button
+          color="primary"
           className={`capitalize ${props.className}`}
         >
           {fontEnumToString(selectedFont)}
@@ -180,6 +183,7 @@ function FontSelect(props: FontSelectProps) {
 
       <DropdownMenu
         aria-label="Layer selection"
+        color="secondary"
         variant="flat"
         disallowEmptySelection
         selectionMode="single"
@@ -218,6 +222,7 @@ function LayerSelect({ layers, selectLayer, className = "", start = "" }: LayerS
     <Dropdown>
       <DropdownTrigger>
         <Button
+          color="primary"
           className={`capitalize ${className}`}
         >
           {selectedValue}
@@ -225,6 +230,7 @@ function LayerSelect({ layers, selectLayer, className = "", start = "" }: LayerS
       </DropdownTrigger>
 
       <DropdownMenu
+        color="secondary"
         aria-label="Layer selection"
         variant="flat"
         disallowEmptySelection
@@ -270,6 +276,6 @@ function ImageUpload(props: ImageUploadProps) {
     }
   }
   return (
-    <Input type="file" accept="image/*" onChange={(val) => onUpload(val.target.files ? val.target.files[0] : null)} />
+    <Input color="primary" type="file" accept="image/*" onChange={(val) => onUpload(val.target.files ? val.target.files[0] : null)} />
   )
 }

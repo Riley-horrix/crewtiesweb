@@ -145,7 +145,7 @@ export default function Design() {
         <Webbing state={webbingState} />
         <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
       </div>
-      <Divider />
+      <Divider className="mt-[20px]"/>
       <h1 className="p-5 text-lg">Check out community designs... (coming soon)</h1>
     </main>
   );

@@ -31,7 +31,7 @@ interface Props {
   tooltip: string,
 }
 
-export default function DesignSlider({ label, min, max, step = undefined, start = undefined, init = 0, marks = undefined, valueDisplay = undefined, onChangeFunc = undefined, tooltip = "" }: Props) {
+export default function WebbingSlider({ label, min, max, step = undefined, start = undefined, init = 0, marks = undefined, valueDisplay = undefined, onChangeFunc = undefined, tooltip = "" }: Props) {
 
   const [val, setVal] = useState<number>(init);
   const [ttOpen, setTTOpen] = useState<boolean>(false);
@@ -56,10 +56,7 @@ export default function DesignSlider({ label, min, max, step = undefined, start 
       // onChange={setVal}
       onChangeEnd={onChangeFunc}
       classNames={{
-        base: "w-full",
-        // thumb: "bg-white border-2 border-accent",
-        // track: "bg-ter",
-        // filler: "bg-accent"
+        track: "bg-[#aaccfa]"
       }}
       renderLabel={({ children, ...props }) => (
         <label {...props} className="text-medium flex gap-2 items-center">
