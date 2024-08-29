@@ -17,10 +17,9 @@ export default function Contact() {
   return (
     <main className="light text-foreground bg-background">
       <Header />
-      <div className="max-w-[700px] mx-auto mt-5">
-        <h1 className="italic font-bold text-4xl">Thinking about bringing your club's style to the next level?</h1>
+      <div className="max-w-[700px] mx-auto mt-5 px-3">
+        <h1 className="italic font-bold text-4xl">Thinking about bringing your club&apos;s style to the next level?</h1>
         <div>
-          <h2 className="italic text-2xl mt-3">...or just want to replace your cheap, old boat straps with something higher quality? </h2>
           <Divider className="my-3"/>
           <h3 className="text-xl">Send our enquiries team an email and we will get back to you as soon as possible!</h3>
           <div className="text-left mt-5 flex flex-row items-center"><i className="mr-[10px] text-xl bi bi-envelope-fill"></i>enquiries@crewties.co.uk</div>

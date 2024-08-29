@@ -12,7 +12,8 @@ module.exports = {
     extend: {
       screens: {
         "xs": "400px",
-        "sm": "560px"
+        "sm": "560px",
+        "md": "733px"
       },
     },
   },
@@ -64,7 +65,21 @@ module.exports = {
       themes: {
         light: {
           layout: {}, // light theme layout tokens
-          colors: {}, // light theme colors
+          colors: {
+            primary: {
+              300: "#f5dd87",
+              DEFAULT: "#FEC705",
+              foreground: "black"
+            },
+            secondary: {
+              DEFAULT: "#2d67cc",
+              foreground: "white"
+            },
+            danger: {
+              DEFAULT: "#db3b3b",
+              foreground: "white",
+            }
+          }, // light theme colors
         },
         dark: {
           layout: {}, // dark theme layout tokens

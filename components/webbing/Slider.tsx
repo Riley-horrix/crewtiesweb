@@ -56,7 +56,7 @@ export default function WebbingSlider({ label, min, max, step = undefined, start
       // onChange={setVal}
       onChangeEnd={onChangeFunc}
       classNames={{
-        track: "bg-[#aaccfa]"
+        track: "bg-[#fcecb1]"
       }}
       renderLabel={({ children, ...props }) => (
         <label {...props} className="text-medium flex gap-2 items-center">

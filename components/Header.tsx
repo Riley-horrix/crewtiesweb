@@ -7,11 +7,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const path = usePathname();
-  const menuItems = [
-    "Home",
-    "Contact",
-    "Design",
-  ];
 
   return (
     <Navbar
@@ -34,7 +29,7 @@ export default function Header() {
           "data-[active=true]:after:h-[6px]",
           "data-[active=true]:after:w-[150%]",
           "data-[active=true]:after:rounded-[2px]",
-          "data-[active=true]:after:bg-secondary",
+          "data-[active=true]:after:bg-[#377efa]",
         ]
       }}
     >
@@ -70,18 +65,36 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color="foreground"
-              href={item === "Home" ? "" : item.toLowerCase()}
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+      <NavbarMenuItem>
+        <Link
+          className="w-full"
+          color="foreground"
+          href="/"
+          size="lg"
+        >
+          Home
+        </Link>
+      </NavbarMenuItem>
+      <NavbarMenuItem>
+        <Link
+          className="w-full"
+          color="foreground"
+          href="/contact"
+          size="lg"
+        >
+          Contact
+        </Link>
+      </NavbarMenuItem>
+      <NavbarMenuItem>
+        <Link
+          className="w-full"
+          color="foreground"
+          href="/design"
+          size="lg"
+        >
+          Design
+        </Link>
+      </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
