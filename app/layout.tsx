@@ -12,13 +12,10 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 
-import { NextUIProvider } from "@nextui-org/react";
-
 import "./globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import styles from "./layout.module.css";
-import Logo from "../components/Logo";
+import Providers from "./providers";
 
 const font = Roboto_Slab({ subsets: ["latin"] });
 
@@ -38,15 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
-        <NextUIProvider>
-          <nav className={styles.navbar}>
-            <div className={styles.navitem}></div>
-            <Logo size={150} className={styles.navitem} />
-            <i className={`${styles.navitem} ${styles.burger} bi bi-list`}></i>
-          </nav>
+      <body className={`${font.className}`}>
+        <Providers>
           {children}
-        </NextUIProvider>
+        </Providers>
       </body>
     </html>
   );

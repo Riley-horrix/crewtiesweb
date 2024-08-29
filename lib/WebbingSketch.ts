@@ -181,8 +181,6 @@ export const webbingSketch: (arg0: WebbingState) => P5jsSketch = (state: Webbing
         })
         index += 1;
       }
-      sketch.stroke(0);
-      sketch.circle(0, 0, 20);
       sketch.pop();
     }
   })
