@@ -66,24 +66,44 @@ module.exports = {
         light: {
           layout: {}, // light theme layout tokens
           colors: {
+            background: {
+              300: "#FFFFFF",
+              DEFAULT: "#F7F5F2"
+            },
             primary: {
               300: "#f5dd87",
               DEFAULT: "#FEC705",
-              foreground: "black"
+              foreground: "#292929"
             },
             secondary: {
               DEFAULT: "#2d67cc",
-              foreground: "white"
+              foreground: "#F7F5F2"
             },
             danger: {
               DEFAULT: "#db3b3b",
-              foreground: "white",
+              foreground: "#F7F5F2",
             }
           }, // light theme colors
         },
         dark: {
           layout: {}, // dark theme layout tokens
-          colors: {}, // dark theme colors
+          colors: {
+            background: "#4C4C4C",
+            primary: {
+              300: "#f5dd87",
+              DEFAULT: "#FEC705",
+              foreground: "#292929"
+            },
+            secondary: {
+              300: "#3398E7",
+              DEFAULT: "#2d67cc",
+              foreground: "#F7F5F2"
+            },
+            danger: {
+              DEFAULT: "#db3b3b",
+              foreground: "#F7F5F2",
+            }
+          }, // dark theme colors
         },
         // ... custom themes
       },

@@ -124,7 +124,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
     <div className="flex flex-col items-center justify-start w-full" onClick={(e) => {console.log(e.target);setEditTitle(false)}}>
       {/* TODO - change to a custom input field. */}
       {/* {!editTitle && <h1 className="text-3xl mt-[10px]">{state.name}{' '}<i className="bi bi-pencil-square"  onClick={(e) => {setEditTitle(true); e.preventDefault()}}></i></h1>} */}
-      <Input spellCheck={false} size="lg" classNames={{base: "mb-3", input: "text-2xl font-bold"}} variant="underlined" defaultValue="My design" value={state.name} onValueChange={(name) => stateFuncs.setWebbingName(name)} onClick={(e) => {e.preventDefault()}}/> 
+      <Input endContent={<i className="bi bi-pencil-square text-xl"></i>} spellCheck={false} size="lg" classNames={{base: "mb-3", input: "text-3xl font-bold"}} variant="underlined" defaultValue="My design" value={state.name} onValueChange={(name) => stateFuncs.setWebbingName(name)} onClick={(e) => {e.preventDefault()}}/> 
       {/* <Divider className="my-3 bg-secondary" /> */}
       <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
       <Divider className="my-4 bg-[#dddddd] h-[3px]" />

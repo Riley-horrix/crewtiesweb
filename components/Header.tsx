@@ -12,6 +12,7 @@ export default function Header() {
     <Navbar
       isBordered={true}
       isMenuOpen={isMenuOpen}
+      isBlurred
       onMenuOpenChange={setIsMenuOpen}
       position="sticky"
       classNames={{
@@ -29,7 +30,7 @@ export default function Header() {
           "data-[active=true]:after:h-[6px]",
           "data-[active=true]:after:w-[150%]",
           "data-[active=true]:after:rounded-[2px]",
-          "data-[active=true]:after:bg-[#377efa]",
+          "data-[active=true]:after:bg-secondary-300",
         ]
       }}
     >
