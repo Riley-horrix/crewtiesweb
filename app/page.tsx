@@ -54,7 +54,7 @@ export default function Home() {
         <h3 className="text-3xl font-bold">All of our boat straps are manufactured in the UK; featuring high quality buckles and printed polyester webbing.</h3>
       </div>
       <Divider />
-      <div className="flex flex-col md:flex-row dark text-foreground bg-background md:justify-between px-[8vw] w-full py-[30px] items-center">
+      <div className="flex flex-col-reverse md:flex-row dark text-foreground bg-background md:justify-between px-[8vw] w-full py-[30px] items-center">
         <h3 className="flex-1 text-xl">
           Our bespoke straps offer the opportunity to create branded boat ties, promoting your club&apos;s identity and branding.<br/><br/>Use our very own online designer to create a design that best represents your club&apos;s ideals. You can also use any photo editing software and email your designs, or have one of our team do it for you!<br/><br/>Alternatively, a great way to bring together your club and create a lasting identity would be to host a design competition, so the boat ties would truly be a part of your community!<br/><br/>Having all of your equipment being branded also helps with organisation and preventing loss and theft.
         </h3>
@@ -76,7 +76,7 @@ export default function Home() {
           </ul>
         </h3>
       </div>
-      <div className="flex flex-col md:flex-row dark text-foreground bg-background md:justify-between px-[8vw] w-full py-[30px] items-center">
+      <div className="flex flex-col-reverse md:flex-row dark text-foreground bg-background md:justify-between px-[8vw] w-full py-[30px] items-center">
         <h3 className="flex-1 text-xl">
           Rowing boats are expensive, and ensuring that they stay safe on trailers or racks at your club or in transit is crucial. <br /><br /> At CrewTies, we pride ourselves on having the highest quality boat straps, manufactured with precision and quality. <br/><br/>Our boat straps are sewn using polyester, a much stronger fabric than most mainstream polypropelene boat ties.<br/><br/>CrewTies are manufactured in the UK, using UK textiles, parts and people, for quality you can trust!
         </h3>
