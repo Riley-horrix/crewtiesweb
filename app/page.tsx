@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 /**
  * @file page.tsx
  * @author Riley Horrix (riley@horrix.com)
@@ -44,6 +45,7 @@ export default function Home() {
       {/* <DecorationBar width={10} height={10} rotate={0} top={100} right={100} color="primary"/> */}
       {/* <DecorationBar width={10} height={100} rotate={0} top={100} right={150} color="primary"/> */}
       </div>
+      <Footer />
     </main>
   )
 }

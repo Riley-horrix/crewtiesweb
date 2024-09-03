@@ -13,6 +13,7 @@
 
 import Webbing from "@/app/design/Webbing";
 import WebbingDesigner from "@/app/design/WebbingDesigner";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 import { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
@@ -147,6 +148,7 @@ export default function Design() {
       </div>
       <Divider className="mt-[20px]"/>
       <h1 className="p-5 text-lg">Check out community designs... (coming soon)</h1>
+      <Footer />
     </main>
   );
 }
