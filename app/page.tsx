@@ -26,7 +26,7 @@ export default function Home() {
           <h1 className="text-5xl italic text-left mb-3"><strong>Customizable quality, for your club</strong></h1>
           <h2 className="text-4xl italic text-left">Promote your brand with bespoke boat ties, designed by you, for you</h2>
           <Divider className="mb-[10px] mt-[10px] h-[2px] bg-secondary" />
-          <h3 className="text-2xl text-left">Email our enquiries team for more information or to organise a 30 minute design consultation where we can show you what your design will look like brought to life!</h3>
+          <h3 className="text-2xl text-left">Email our enquiries team for more information or to organise a 30 minute design consultation where we can show you what your design will look like brought to reality!</h3>
           <Button as={Link} href="/contact" color="primary" variant="solid" className="text-xl px-[20px] py-[25px] mt-[20px] mb-10">Contact us!</Button>
           {/* <h3 className="text-2xl text-left">Use the world&apos;s first boat strap designer to create a unique patttern for you or your club!</h3>
           <Button as={Link} href="/design" color="primary" variant="solid" className="text-xl px-[20px] py-[25px] mt-[20px] mb-10">Start Designing</Button> */}
@@ -58,7 +58,7 @@ export default function Home() {
       <Divider />
       <div className="flex flex-col-reverse md:flex-row dark text-foreground bg-background md:justify-between px-[8vw] w-full py-[30px] items-center">
         <h3 className="flex-1 text-xl">
-          Our bespoke straps offer the opportunity to create branded boat ties, promoting your club&apos;s identity and branding.<br/><br/>Send us an email at enquiries@crewties.co.uk or use our contact page and one of our team can organise a 30 minute free design consultation.<br/><br/>Alternatively, a great way to bring together your club and create a lasting identity would be to host a design competition, so the boat ties would truly be a part of your community!<br/><br/>Having all of your equipment being branded also helps with organisation and preventing loss and theft.
+          Our bespoke straps offer the opportunity to create branded boat ties, promoting your club&apos;s identity and branding.<br/><br/>Book a 30 minute free consultation with one of our team and we can show you what your club&apos;s boat ties could look like!<br/><br/>A great way to bring together your club and create a lasting identity would be to host a design competition, so the boat ties would truly be a part of your community!<br/><br/>Having all of your equipment being branded also helps with organisation and preventing loss and theft.
         </h3>
         <div className="flex flex-row md:flex-col gap-x-[10px] md:gap-x-0 flex-1 items-center mb-[30px] md:mb-0">
           <i className="bi bi-people-fill text-6xl my-[10px] text-primary"></i>
@@ -89,7 +89,7 @@ export default function Home() {
       </div>
       <Divider className="mb-[30px]"/>
       <div className="text-center w-full mt-[20px] text-xl px-[20vw]">
-        If you are interested in placing an order or would like to know the various pricing options, then head over to our contact page!
+        If you are interested in knowing more about what we do or want to see firsthand what your boat straps could look like, then head over to our contact page!
       </div>
       <Button as={Link} href="/contact" color="primary" variant="solid" className="text-xl px-[20px] py-[25px] mt-[20px] mb-10">Contact Us</Button>
       <Divider className="mt-[30px]"/>
