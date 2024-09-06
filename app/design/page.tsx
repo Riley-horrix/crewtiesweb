@@ -152,11 +152,11 @@ export default function Design() {
   return (
     <main className="light text-foreground bg-background">
       <Header />
-      <div className="flex flex-row justify-between items-top h-full p-3 gap-x-[3vw] max-w-[700px] mx-auto">
+      <div className="flex flex-row justify-between items-top h-full p-3 gap-x-[3vw] pb-[30px] pt-[20px] max-w-[700px] mx-auto">
         <Webbing state={webbingState} />
         <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
       </div>
-      <Divider className="mt-[20px]"/>
+      {/* <Divider className="mt-[20px]"/>
       
       {communityData.length !== 0 && 
       <>
@@ -174,7 +174,7 @@ export default function Design() {
         }
       </div>
       </>
-      }
+      } */}
       <Footer />
     </main>
   );

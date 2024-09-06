@@ -58,11 +58,11 @@ export default function Header() {
             Contact
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={path.startsWith("/design")}>
+        {/* <NavbarItem isActive={path.startsWith("/design")}>
           <Link color="foreground" href="/design">
             Design
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarMenu>
@@ -86,7 +86,7 @@ export default function Header() {
           Contact
         </Link>
       </NavbarMenuItem>
-      <NavbarMenuItem>
+      {/* <NavbarMenuItem>
         <Link
           className="w-full"
           color="foreground"
@@ -95,7 +95,7 @@ export default function Header() {
         >
           Design
         </Link>
-      </NavbarMenuItem>
+      </NavbarMenuItem> */}
       </NavbarMenu>
     </Navbar>
   );

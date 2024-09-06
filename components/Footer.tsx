@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="flex flex-row w-full justify-center items-center gap-x-[70px]">
         <Link className="font-bold text-foreground-600 hover:cursor-pointer" href="/">Home</Link>
         <Link className="font-bold text-foreground-600 hover:cursor-pointer" href="/contact">Contact</Link>
-        <Link className="font-bold text-foreground-600 hover:cursor-pointer" href="/design">Design</Link>
+        {/* <Link className="font-bold text-foreground-600 hover:cursor-pointer" href="/design">Design</Link> */}
       </div>
       <div className="flex flex-col xs:flex-row gap-y-[10px] xs:gap-y-0 justify-between w-full px-[50px] items-center mt-[30px]">
         <h3 className="flex flex-row text-foreground-500 items-center text-xs"><i className="bi bi-envelope-fill pr-2 pt-[2px]"></i> enquiries@crewties.co.uk</h3>
