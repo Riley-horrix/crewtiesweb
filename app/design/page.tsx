@@ -13,13 +13,15 @@
 
 import Webbing from "@/app/design/Webbing";
 import WebbingDesigner from "@/app/design/WebbingDesigner";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { P5jsContainer } from "@/components/P5jsContainer";
+import { webbingSketch } from "@/lib/WebbingSketch";
 
-import { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
-import { Divider } from "@nextui-org/react";
+import WebbingState, { WebbingLayer, emptyWebbingState } from "@/lib/WebbingState";
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * The object interface used to manipulate the webbing design.
@@ -139,6 +141,14 @@ export default function Design() {
     layers
   }
 
+  const [communityData, setCommunityData] = useState<WebbingState[]>([]);
+
+  useEffect(() => {
+    fetch("/api/design/101")
+      .then((res) => res.json())
+      .then((data) => setCommunityData(data));
+  }, [])
+
   return (
     <main className="light text-foreground bg-background">
       <Header />
@@ -147,7 +157,24 @@ export default function Design() {
         <WebbingDesigner state={webbingState} stateFuncs={stateFuncs} />
       </div>
       <Divider className="mt-[20px]"/>
-      <h1 className="p-5 text-lg">Check out community designs... (coming soon)</h1>
+      
+      {communityData.length !== 0 && 
+      <>
+      <h1 className="mt-[20px] text-xl px-[20px] mb-[20px]">Check out the other designs from people in your group!</h1>
+      <div className="pb-[20px] flex flex-row flex-wrap gap-[20px] px-[20px] justify-evenly">
+        {
+          communityData.map((webbing) => (
+            <Card className="" id={webbing.name + "-id-design-" + webbing.angle} isHoverable>
+              <CardHeader className="w-full">{webbing.name}</CardHeader>
+              <CardBody>
+                <P5jsContainer className="w-[100px] h-[300px]" sketch={webbingSketch(webbing)}/>
+              </CardBody>
+            </Card>
+          ))
+        }
+      </div>
+      </>
+      }
       <Footer />
     </main>
   );
