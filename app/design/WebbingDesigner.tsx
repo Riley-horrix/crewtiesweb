@@ -169,7 +169,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
           {renderAdvancedEditor() || <Button color="danger" className="w-full mt-4" onPress={() => stateFuncs.removeLayer(selectedLayerId)}>Remove Layer</Button>}
           <Divider className="my-4 w-full h-[3px]" />
           <Button color="secondary" variant="ghost" className="w-full" onPress={() => downloadStrapFile()}>Save Design</Button>
-          <Input type="file" color="secondary" variant="flat" className="w-full mt-4" accept="*.strap"
+          <Input type="file" color="secondary" variant="flat" className="w-full mt-4" accept=".strap"
             onChange={(val) => val.target.files ? uploadStrapFile(val.target.files[0]) : console.log("No file")}>Upload design</Input>
         </div>
       )

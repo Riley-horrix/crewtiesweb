@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
  */
 
 import Header from "@/components/Header";
+import StrapShowcase from "@/components/StrapShowcase";
 import { Button, Card, Divider, Link, Skeleton } from "@nextui-org/react";
 
 /**
@@ -31,18 +32,7 @@ export default function Home() {
           {/* <h3 className="text-2xl text-left">Use the world&apos;s first boat strap designer to create a unique patttern for you or your club!</h3>
           <Button as={Link} href="/design" color="primary" variant="solid" className="text-xl px-[20px] py-[25px] mt-[20px] mb-10">Start Designing</Button> */}
         </div>
-        <div className="flex flex-row gap-[15px] justify-center">
-          {/* <div className="absolute w-[10px] h-[600px] bg-primary rotate-12 right-[160px]"> </div>
-          <div className="absolute w-[10px] h-[600px] bg-primary rotate-12 right-[200px]"> </div> */}
-          <div className="flex flex-col gap-[30px] pt-[100px]">
-            <EmptyImageCard />
-            <EmptyImageCard />
-          </div>
-          <div className="flex flex-col gap-[30px]">
-            <EmptyImageCard />
-            <EmptyImageCard />
-          </div>
-        </div>
+        <StrapShowcase />
         {/* <DecorationBar width={10} height={10} rotate={0} top={100} right={100} color="primary"/> */}
         {/* <DecorationBar width={10} height={100} rotate={0} top={100} right={150} color="primary"/> */}
       </div>
@@ -100,14 +90,4 @@ export default function Home() {
       <Footer />
     </main>
   )
-}
-
-function EmptyImageCard() {
-  return (
-    <Card className="w-[160px] h-[280px] space-y-5 p-4" radius="lg">
-      <Skeleton className="rounded-lg">
-        <div className="h-[2000px] rounded-lg bg-default-300"></div>
-      </Skeleton>
-    </Card>
-  );
 }

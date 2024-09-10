@@ -45,7 +45,7 @@ export const P5jsContainer: P5jsContainer = ({ sketch, className }) => {
       }
     };
     initP5();
-  }, [isMounted, sketch]);
+  }, [sketch]);
 
   return <div ref={parentRef} className={className}></div>;
 };
