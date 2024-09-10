@@ -66,6 +66,14 @@ export interface StateFuncs {
    * @returns void
    */
   moveLayerToIndex: (arg0: string, arg1: number) => void
+
+  /**
+   * Sets the webbing state to be equal to input state.
+   * 
+   * @param arg0 The state to set to
+   * @returns 
+   */
+  setWebbingState: (arg0: WebbingState) => void
 }
 
 /**
@@ -97,7 +105,7 @@ export default function Design() {
   const moveLayerToIndex: (arg0: string, arg1: number) => void = (layerId, index) => {
     setLayers((prev) => {
       const selectedLayers = prev.filter((thisLayer) => thisLayer.id == layerId);
-      if (selectedLayers.length === 0){ return prev; }
+      if (selectedLayers.length === 0) { return prev; }
       const layerToChange = selectedLayers[0];
       const oldLayers: WebbingLayer[] = prev.filter((prevLayer) => prevLayer.id !== layerId);
       if (index === (prev.length - 1)) {
@@ -106,7 +114,7 @@ export default function Design() {
       }
       const newLayers: WebbingLayer[] = [];
       oldLayers.forEach((layer, layerIndex) => {
-        if (layerIndex === index){
+        if (layerIndex === index) {
           newLayers.push(layerToChange);
         }
         if (layer.id !== layerId) {
@@ -125,6 +133,11 @@ export default function Design() {
   const setWebbingAnlge: (arg0: number) => void = (newAngle) => {
     setAngle(newAngle);
   }
+  const setWebbingState: (arg0: WebbingState) => void = (state) => {
+    setName(state.name);
+    setAngle(state.angle);
+    setLayers(state.layers);
+  }
 
   const stateFuncs: StateFuncs = {
     appendLayer,
@@ -132,7 +145,8 @@ export default function Design() {
     removeLayer,
     setWebbingName,
     setWebbingAnlge,
-    moveLayerToIndex
+    moveLayerToIndex,
+    setWebbingState
   }
 
   const webbingState = {

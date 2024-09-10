@@ -40,13 +40,17 @@ export default function Header() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <CrewtiesLogo width={200} />
+          <Link href="/">
+            <CrewtiesLogo width={200} />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-7" justify="end">
         <NavbarBrand>
-          <CrewtiesLogo width={200} />
+          <Link href="/">
+            <CrewtiesLogo width={200} />
+          </Link>
         </NavbarBrand>
         <NavbarItem isActive={path.endsWith("/")}>
           <Link color="foreground" href="/">
@@ -66,27 +70,27 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarMenu>
-      <NavbarMenuItem>
-        <Link
-          className="w-full"
-          color="foreground"
-          href="/"
-          size="lg"
-        >
-          Home
-        </Link>
-      </NavbarMenuItem>
-      <NavbarMenuItem>
-        <Link
-          className="w-full"
-          color="foreground"
-          href="/contact"
-          size="lg"
-        >
-          Contact
-        </Link>
-      </NavbarMenuItem>
-      {/* <NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link
+            className="w-full"
+            color="foreground"
+            href="/"
+            size="lg"
+          >
+            Home
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link
+            className="w-full"
+            color="foreground"
+            href="/contact"
+            size="lg"
+          >
+            Contact
+          </Link>
+        </NavbarMenuItem>
+        {/* <NavbarMenuItem>
         <Link
           className="w-full"
           color="foreground"

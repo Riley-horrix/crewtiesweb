@@ -68,16 +68,16 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
 
   const moveLayer = (dir: Direction) => {
     const foundIndex = state.layers.findIndex((layer) => layer.id === selectedLayerId);
-    
+
     // This is disgusting and I hate it
-    const index = 
+    const index =
       foundIndex === -1 ?
         0 :
-        (dir === Direction.DOWN ? 
-          (foundIndex === (state.layers.length - 1) ? 
+        (dir === Direction.DOWN ?
+          (foundIndex === (state.layers.length - 1) ?
             (state.layers.length - 1) :
             foundIndex + 1
-          ) : 
+          ) :
           (foundIndex === 0 ?
             0 :
             foundIndex - 1
@@ -88,7 +88,25 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
     stateFuncs.moveLayerToIndex(selectedLayerId, index);
   }
 
-  const [editTitle, setEditTitle] = useState(false);
+  const downloadStrapFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(state)], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = state.name + ".strap";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
+  const uploadStrapFile = (file: File) => {
+    const fr = new FileReader();
+    fr.readAsText(file);
+    fr.onload = (ev) => {
+      if (!ev.target?.result) { return; }
+      if (typeof ev.target.result !== "string") { return; }
+      const strap: WebbingState = JSON.parse(ev.target.result);
+      stateFuncs.setWebbingState(strap);
+    }
+  }
 
   const renderAdvancedEditor = () => {
     if (!selectedLayer) return;
@@ -99,7 +117,7 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
       case LayerState.TEXT:
         console.log("render")
         return (
-          <div className="mt-3 w-full flex flex-col">
+          <div className="w-full flex flex-col">
             <Input color="primary" type="text" label="Webbing Text" variant="underlined" placeholder="Webbing Text Here..." value={selectedLayer.text} onValueChange={(val) => { stateFuncs.editLayer(selectedLayerId, "text", val) }} defaultValue={selectedLayer.text} />
             <div className="w-full flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 justify-between items-center mt-3 mb-1">
               <FontSelect changeFont={(val) => { stateFuncs.editLayer(selectedLayerId, "font", val) }} font={selectedLayer.font} className="w-full sm:w-1/2 sm:mr-[5vw]" />
@@ -112,19 +130,19 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
 
       case LayerState.LOGO:
         return (
-          <div className="w-full flex flex-col gap-y-3">
+          <div className="w-full flex flex-col gap-y-4">
             <ImageUpload setImageData={(val) => stateFuncs.editLayer(selectedLayerId, "img", val)} />
             <Button color="danger" className="w-full" onPress={() => setLayerState(LayerState.NONE)}>Remove Logo</Button>
           </div>
         )
     }
   }
-  console.log(editTitle);
+
   return (
-    <div className="flex flex-col items-center justify-start w-full" onClick={(e) => {console.log(e.target);setEditTitle(false)}}>
+    <div className="flex flex-col items-center justify-start w-full">
       {/* TODO - change to a custom input field. */}
       {/* {!editTitle && <h1 className="text-3xl mt-[10px]">{state.name}{' '}<i className="bi bi-pencil-square"  onClick={(e) => {setEditTitle(true); e.preventDefault()}}></i></h1>} */}
-      <Input endContent={<i className="bi bi-pencil-square text-xl"></i>} spellCheck={false} size="lg" classNames={{base: "mb-3", input: "text-3xl font-bold"}} variant="underlined" defaultValue="My design" value={state.name} onValueChange={(name) => stateFuncs.setWebbingName(name)} onClick={(e) => {e.preventDefault()}}/> 
+      <Input endContent={<i className="bi bi-pencil-square text-xl"></i>} spellCheck={false} size="lg" classNames={{ base: "mb-3", input: "text-3xl font-bold" }} variant="underlined" defaultValue="My design" value={state.name} onValueChange={(name) => stateFuncs.setWebbingName(name)} onClick={(e) => { e.preventDefault() }} />
       {/* <Divider className="my-3 bg-secondary" /> */}
       <WebbingSlider label="Angle" min={-90} max={90} step={1} start={0} init={0} valueDisplay={(num) => `${num} deg`} onChangeFunc={(val) => { stateFuncs.setWebbingAnlge(typeof val == "number" ? val : 0) }} tooltip="The angle that the design is rotated on the webbing." />
       <Divider className="my-4 bg-[#dddddd] h-[3px]" />
@@ -144,14 +162,19 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
           <WebbingSlider label="Row Offset" min={1} max={10} step={1} init={selectedLayer.rowoff} valueDisplay={(num) => `${num} rows`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "rowoff", val) }} tooltip="How many rows it takes for this layer to repeat itself. (WARNING can cause design to become non-repeating)" />
           {/* TODO : if you drag picker it re-renders webbing multiple times. */}
           <Input color="primary" size="md" type="color" label="Background Color" variant="underlined" placeholder={selectedLayer.bgColor} onValueChange={(val) => setLayerBackground(val)} classNames={{ base: "max-w-lg my-3", label: "text-lg" }} defaultValue={selectedLayer.bgColor} value={selectedLayer.bgColor} />
-          <div className="flex flex-row justify-around w-full mt-2 sm:px-0 gap-x-[10px]">
+          <div className="flex flex-row justify-around w-full mt-2 mb-4 sm:px-0 gap-x-[10px]">
             <Button color="primary" startContent={<i className="bi bi-fonts"></i>} onPress={() => setLayerState(LayerState.TEXT)}><p className="hidden xs:block">Use Text</p></Button>
             <Button color="primary" startContent={<i className="bi bi-image"></i>} onPress={() => setLayerState(LayerState.LOGO)}><p className="hidden xs:block">Use Logo</p></Button>
           </div>
           {renderAdvancedEditor() || <Button color="danger" className="w-full mt-4" onPress={() => stateFuncs.removeLayer(selectedLayerId)}>Remove Layer</Button>}
+          <Divider className="my-4 w-full h-[3px]" />
+          <Button color="secondary" variant="ghost" className="w-full" onPress={() => downloadStrapFile()}>Save Design</Button>
+          <Input type="file" color="secondary" variant="flat" className="w-full mt-4" accept="*.strap"
+            onChange={(val) => val.target.files ? uploadStrapFile(val.target.files[0]) : console.log("No file")}>Upload design</Input>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 
