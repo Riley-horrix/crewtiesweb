@@ -162,14 +162,15 @@ export default function WebbingDesigner({ state, stateFuncs }: Props) {
           <WebbingSlider label="Row Offset" min={1} max={10} step={1} init={selectedLayer.rowoff} valueDisplay={(num) => `${num} rows`} onChangeFunc={(val) => { stateFuncs.editLayer(selectedLayerId, "rowoff", val) }} tooltip="How many rows it takes for this layer to repeat itself. (WARNING can cause design to become non-repeating)" />
           {/* TODO : if you drag picker it re-renders webbing multiple times. */}
           <Input color="primary" size="md" type="color" label="Background Color" variant="underlined" placeholder={selectedLayer.bgColor} onValueChange={(val) => setLayerBackground(val)} classNames={{ base: "max-w-lg my-3", label: "text-lg" }} defaultValue={selectedLayer.bgColor} value={selectedLayer.bgColor} />
-          <div className="flex flex-row justify-around w-full mt-2 mb-4 sm:px-0 gap-x-[10px]">
+          <div className="flex flex-row justify-around w-full mt-2 mb-2 sm:px-0 gap-x-[10px]">
             <Button color="primary" startContent={<i className="bi bi-fonts"></i>} onPress={() => setLayerState(LayerState.TEXT)}><p className="hidden xs:block">Use Text</p></Button>
             <Button color="primary" startContent={<i className="bi bi-image"></i>} onPress={() => setLayerState(LayerState.LOGO)}><p className="hidden xs:block">Use Logo</p></Button>
           </div>
           {renderAdvancedEditor() || <Button color="danger" className="w-full mt-4" onPress={() => stateFuncs.removeLayer(selectedLayerId)}>Remove Layer</Button>}
           <Divider className="my-4 w-full h-[3px]" />
           <Button color="secondary" variant="ghost" className="w-full" onPress={() => downloadStrapFile()}>Save Design</Button>
-          <Input type="file" color="secondary" variant="flat" className="w-full mt-4" accept=".strap"
+          <label className="w-full text-left mt-3 pl-1">Load .strap file :</label>
+          <Input type="file" color="secondary" variant="flat" className="w-full mt-2" accept=".strap"
             onChange={(val) => val.target.files ? uploadStrapFile(val.target.files[0]) : console.log("No file")}>Upload design</Input>
         </div>
       )

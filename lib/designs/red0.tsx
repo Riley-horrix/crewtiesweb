@@ -1,0 +1,1 @@
+export const red0: string = '{"name":"crewTiesRed","angle":30,"layers":[{"id":"Layer 1","hspace":5,"vspace":5,"size":38,"rowoff":8,"bgColor":"#e10909","state":1,"img":"","text":"CrewTIES","font":1,"fontColor":"#f7f7f7","bold":true}]}'
