@@ -21,7 +21,7 @@ const font = Roboto_Slab({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CrewTies",
-  description: "The official webpage of CrewTies, high quality rowing boat straps.",
+  description: "High quality, UK made, bespoke rowing boat straps.",
 };
 
 /**
