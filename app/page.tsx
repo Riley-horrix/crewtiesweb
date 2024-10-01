@@ -40,7 +40,7 @@ export default function Home() {
       <div className="flex flex-col gap-y-[20px] py-[30px] items-center w-full px-[10vw]  bg-background-300">
         {/* <h1 className="text-[90px]"><i className="bi bi-patch-question-fill"></i></h1> */}
         <div className="flex flex-row">
-          <h3 className="text-3xl font-bold">CrewTies is a company dedicated to providing highly customisable boat straps to the rowing community that don&apos;t compromise on quality.</h3>
+          <h3 className="text-3xl font-bold">CrewTies is a company dedicated to providing highly customisable boat straps to the rowing community and further, that don&apos;t compromise on quality.</h3>
           {/* <EmptyImageCard /> */}
         </div>
         <h3 className="text-3xl font-bold">Our boat straps are manufactured in the UK; they feature high quality buckles and printed polyester webbing.</h3>
@@ -74,7 +74,7 @@ export default function Home() {
           Rowing boats represent a considerable investment, and securing them safely on trailers or racks at your club or in transit is crucial. <br /><br /> At CrewTies, we pride ourselves on having the highest quality boat straps, manufactured with precision and quality. <br /><br />Our straps are sewn using polyester, a much stronger fabric than most mainstream polypropylene boat ties.<br /><br />CrewTies are manufactured in the UK, using UK textiles, parts and people, for quality you can trust!
         </h3> */}
         <h3 className="flex-1 text-xl">
-          Rowing boats represent a considerable investment, and securing them safely on trailers or racks, at your club or in transit is crucial. <br /><br /> At CrewTies, our straps are manufactured using polyester, much stronger and UV / water resistant than mainstream polypropylene straps.<br /><br />We pride ourselves on supplying the highest quality boat straps, made with care and precision.<br /><br />CrewTies are produced in the UK, using UK textiles, parts and people, for quality you can trust!
+          Rowing boats and canoes represent a considerable investment, and securing them safely on trailers or racks, at your club or in transit is crucial. <br /><br /> At CrewTies, our straps are manufactured using polyester, much stronger and UV / water resistant than mainstream polypropylene straps.<br /><br />We pride ourselves on supplying the highest quality boat straps, made with care and precision.<br /><br />CrewTies are produced in the UK, using UK hardware and people, for quality you can trust!
         </h3>
         <div className="flex flex-row md:flex-col gap-x-[10px] md:gap-x-0 flex-1 items-center mb-[30px] md:mb-0">
           <i className="bi bi-shield-fill text-6xl my-[10px] text-primary"></i>
