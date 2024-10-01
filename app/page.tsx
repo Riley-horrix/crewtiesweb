@@ -24,7 +24,7 @@ export default function Home() {
       <Header />
       <div className="flex flex-col md:flex-row max-w-[900px] pt-0 md:pt-[30px] px-[30px] pb-[30px]">
         <div className="pr-0 md:pr-20 flex flex-col justify-top pt-[30px] md:pt-[70px]">
-          <h1 className="text-5xl italic text-left mb-3"><strong>Customisable, quality boat ties for your club</strong></h1>
+          <h1 className="text-5xl italic text-left mb-3"><strong>Customisable, quality boat ties for your club or business</strong></h1>
           <h2 className="text-4xl italic text-left">Promote your brand with bespoke boat ties, designed by you, for you</h2>
           <Divider className="mb-[10px] mt-[10px] h-[2px] bg-secondary" />
           <h3 className="text-2xl text-left">Email our enquiries team for more information or to organise a free design consultation where we can show you what your design could look like!</h3>
