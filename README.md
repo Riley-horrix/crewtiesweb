@@ -6,14 +6,15 @@ This repository is for the CrewTies webpage, designed to advertise the company, 
 
 To run the entire test suite, use,
 ```make
-make test 
+npm run lint
 ```
 
 ## Building
 To create a production build,
 
 ```make
-make build
+npm run build
+npm run start
 ```
 
 ## Developing
@@ -21,7 +22,7 @@ make build
 To run the developmenet server, 
 
 ```make
-make server
+npm run dev
 ```
 
 This creates a server on [http://localhost:3000](http://localhost:3000), browse there to see the page.
